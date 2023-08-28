@@ -8,8 +8,8 @@
 @section('content')
 <div class="form__content">
     <h2 class="form__heading">商品の出品</h2>
-    <div class="upload__photo-content">
-        <div class="upload__photo-button">
+    <div class="upload__image-content">
+        <div class="upload__image-button">
             <a href="">画像を選択する</a>
         </div>
     </div>

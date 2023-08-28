@@ -6,7 +6,7 @@
 
 @section('content')
 <div class= "item__content">
-    <div class="item__photo">
+    <div class="item__image">
         商品画像
     </div>
     <div class="item__detail">
