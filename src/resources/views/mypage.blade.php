@@ -7,11 +7,11 @@
 @section('content')
 <div class="profile__content">
     <div class="profile__inner">
-        <div class="profile__photo">
+        <div class="profile__image">
         </div>
         <p class="user__name">ユーザー名</p>
     </div>
-    <div class="profile__photo-button">
+    <div class="profile__image-button">
         <a href="/profile">プロフィールを編集</a>
     </div>
 </div>

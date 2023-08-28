@@ -12,10 +12,10 @@
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">郵便番号</p>
-                <input type="text" name="post-code" value="{{ old('post-code') }}">
+                <input type="text" name="postcode" value="{{ old('postcode') }}">
             </div>
             <div class="form__error">
-            @error('post-code')
+            @error('postcode')
             {{ $message }}
             @enderror
             </div>
@@ -34,10 +34,10 @@
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">建物名</p>
-                <input type="text" name="building-name">
+                <input type="text" name="buildingname">
             </div>
             <div class="form__error">
-            @error('building-name')
+            @error('buildingname')
             {{ $message }}
             @enderror
             </div>
