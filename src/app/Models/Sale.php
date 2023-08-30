@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Like extends Model
+class Sale extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'item_id',];
+    protected $fillable = ['user_id', 'item_id','payment_amount', 'payment_method_id', 'shipping_name', 'postcode', 'address', 'buildingname'];
+
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PaymentMethod::class);
+    }
 
     public function user()
     {

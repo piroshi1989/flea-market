@@ -80,3 +80,21 @@ body{
     padding: 5px;
     border:none;
 }
+
+.alert {
+    padding: 10px 30px;
+    border-color: #badbcc;
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+textarea {
+    width: 100%;
+    /* 幅を100%にすることで親要素に合わせて伸縮します */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: vertical;
+    /* テキストエリアの垂直リサイズを有効にする */
+}

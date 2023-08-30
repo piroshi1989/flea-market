@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' =>  now(),
             'password' => Hash::make('password'),
             'role' => 0,
+            'imageUrl' => 'https://source.unsplash.com/random/640x480',
         ]);
 
         DB::table('users')->insert([
@@ -29,6 +30,9 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' =>  now(),
             'password' => Hash::make('password'),
             'role' => 0,
+            'postcode' => 1111111,
+            'address' => '兵庫県神戸市中央区1-1',
+            'buildingname' => '神戸ビル203',
         ]);
 
 
