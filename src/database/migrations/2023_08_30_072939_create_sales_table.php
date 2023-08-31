@@ -22,7 +22,7 @@ class CreateSalesTable extends Migration
             $table->string('shipping_name');
             $table->string('postcode');
             $table->string('address');
-            $table->string('buildingname');
+            $table->string('building_name');
             $table->timestamps();
         });
     }

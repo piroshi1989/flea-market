@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
-class Payment_methodTableSeeder extends Seeder
+use Illuminate\Support\Facades\DB;
+class Payment_methodsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

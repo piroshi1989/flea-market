@@ -24,7 +24,27 @@ class ItemRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'category_id' => ['required', 'integer', 'exists:categories,id'],
+            'condition_id' => ['required', 'integer', 'exists:conditions,id'],
+            'name' => ['required', 'string' , 'max:80'],
+            'detail' => ['required', 'string', 'max:10000'],
+            'price' => ['required', 'integer', 'min:300','max:10000000'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'category_id.required' => 'カテゴリーを選択してください',
+            'condition_id.required' => '商品の状態を選択してください',
+            'name.required' => '商品名を入力してください',
+            'name.max' => '商品名を全角40文字以下で入力してください',
+            'detail.required' => '詳細を入力してください',
+            'detail.string' => '詳細を文字列で入力してください',
+            'detail.max' => '詳細を10000文字以内で入力してください',
+            'price.required' => '販売価格を入力してください',
+            'price.max' => '販売価格は300円から10,000,000円の間で設定してください',
+            'price.min' => '販売価格は300円から10,000,000円の間で設定してください',
         ];
     }
 }

@@ -15,11 +15,11 @@ class ItemFactory extends Factory
 
     public function definition()
     {
-        $imageUrl = "https://source.unsplash.com/random/640x480";
+        $image_url = "https://source.unsplash.com/random/640x480";
 
         return [
             'name' => $this->faker->word,
-            'imageUrl' => $imageUrl,
+            'image_url' => $image_url,
             'price' => $this->faker->numberBetween(300,100000),
             'category_id' => $this->faker->numberBetween(1,13),
             'condition_id' => $this->faker->numberBetween(1,6),
