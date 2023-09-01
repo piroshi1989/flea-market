@@ -21,7 +21,7 @@ class ItemFactory extends Factory
             'name' => $this->faker->word,
             'image_url' => $image_url,
             'price' => $this->faker->numberBetween(300,100000),
-            'category_id' => $this->faker->numberBetween(1,13),
+            'category_id' => $this->faker->numberBetween(1,12),
             'condition_id' => $this->faker->numberBetween(1,6),
             'user_id' => $this->faker->numberBetween(1,2),
             'detail' => $this->faker->realText(200),

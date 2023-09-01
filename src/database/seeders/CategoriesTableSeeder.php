@@ -26,7 +26,6 @@ class CategoriesTableSeeder extends Seeder
             ['name' => 'チケット'],
             ['name' => '自転車・オートバイ'],
             ['name' => 'その他'],
-            ['name' => '洋服'],
             ]);
     }
 }

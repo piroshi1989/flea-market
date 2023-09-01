@@ -6,13 +6,13 @@
 
 @section('content')
 <div class= "item__content">
-    <div class="item__image">
-        商品画像
-    </div>
+        <div class="item__image">
+            <img src="{{asset($item['image_url'])}}">
+        </div>
     <div class="item__detail">
-        <p class="item__name">商品名</p>
-        <p class="item__brand">ブランド名</p>
-        <p class="item__price">¥47,000(値段)</p>
+        <p class="item__name">{{ $item['name'] }}</p>
+        <p class="item__brand">ブランド</p>
+        <p class="item__price">¥{{ $item['price'] }}(値段)</p>
         <div class="counter__icons">
             <div class="likes__count"></div>
             <div class="posts__count"></div>
@@ -24,13 +24,7 @@
             </form>
         </div>
         <h3 class="item__description">商品説明</h3>
-        <p class="description__detail">
-            カラー：グレー
-
-            新品
-            商品の状態は良好です。傷もありません。
-
-            購入後、即発送いたします。
+        <p class="description__detail">{{ $item['detail'] }}
         </p>
         <h3 class="item__information">商品の情報</h3>
         <div class="item__information-table">
@@ -41,10 +35,10 @@
                     </th>
                     <td class="item__information-table__item__category">
                         <div class="item__category">
-                            洋服
+                            {{ $item->category->name }}
                         </div>
                         <div class="item__category">
-                            メンズ
+                            {{ $item->category->name }}
                         </div>
                     </td>
                 </tr>
@@ -53,7 +47,7 @@
                     <span class="item__information-table__header-span">商品の状態</span>
                     </th>
                     <td class="item__information-table__item">
-                        良好
+                        {{ $item->condition->name }}
                     </td>
                 </tr>
             </table>

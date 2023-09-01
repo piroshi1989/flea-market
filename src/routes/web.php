@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ShopController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\ItemController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,4 +14,5 @@ use App\Http\Controllers\ShopController;
 |
 */
 
-Route::get('/', [ShopController::class, 'index']);
+Route::get('/', [IndexController::class, 'index']);
+Route::get('/item/{id}', [ItemController::class, 'showDetailItem'])->name('item');
