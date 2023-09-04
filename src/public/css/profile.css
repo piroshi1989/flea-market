@@ -2,27 +2,54 @@
     display: flex;
     align-items: center;
     margin: 30px auto;
-    width: 50%;
+    width: 80%;
 }
 
 .profile__image {
-    background-color: #5F5F5F;
-    width: 100px;
-    height: 100px;
-    padding: 50px;
+    width: 150px;
+    /* 画像の幅を適切なサイズに調整 */
+    height: 150px;
+    /* 画像の高さを適切なサイズに調整 */
     border-radius: 50%;
+    /* 画像を円形にするための角丸設定 */
+    overflow: hidden;
+    /* 画像を円形にクリップするためにオーバーフローを隠す */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.profile__image img {
+    width: 100%;
+    /* 画像を .profile__image 要素の幅に合わせる */
+    height: 100%;
+    /* 画像を .profile__image 要素の高さに合わせる */
+    object-fit: cover;
+    /* 画像をアスペクト比を保ちつつクリップするように調整 */
+}
+
 
 .upload__image-button {
+    display: flex;
+    /* フォーム内の要素を横並びに配置 */
+    align-items: center;
+    /* 垂直方向に中央寄せ */
     margin-left: 30px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #F55;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
 }
 
-.upload__image-button a {
-    color: #F55;
-    font-size: 26px;
-    font-weight: 700;
-    text-decoration: none;
-    border-radius: 10px;
-    border: 2px solid #F55;
-    padding: 10px;
+.upload__form input[type="file"] {
+    display: block;
+    /* フォーム内のファイル選択ボタンを非表示に */
+}
+
+.upload__image-button button {
+    margin-left: 10px;
 }

@@ -1,6 +1,7 @@
 .item__content{
     display:flex;
     padding:50px;
+    width:100%;
 }
 
 .item__image{
@@ -30,7 +31,7 @@
     font-size: 24px;
 }
 
-.item__price{
+.item__price_detail{
     font-weight: 400;
     font-size: 36px;
 }
@@ -83,4 +84,29 @@
     font-size: 20px;
     padding: 10px;
     margin-right:20px;
+}
+
+.likes__count ,.contacts__count  {
+    margin: 5px;
+    font-size: 24px;
+    color: gainsboro;
+    cursor: pointer;
+}
+
+.liked {
+    color: yellow;
+}
+
+.icon-link{
+    text-decoration: none;
+}
+
+.bi.bi-chat {
+    color: gainsboro;
+}
+
+.form__button-submit{
+    text-decoration: none;
+    margin:20px 0;
+    display: block;
 }

@@ -79,8 +79,7 @@
         </li>
         @endif
         <li class="header-nav__item">
-            <button class="header-nav__button" href="/sell">出品
-            </button>
+            <a class="header-nav__link sell" href="/sell">出品</a>
         </li>
     </ul>
 </nav>

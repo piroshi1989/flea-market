@@ -28,7 +28,7 @@ class Child_categoriesTableSeeder extends Seeder
             'category_id' => 1,
             'name' => 'バッグ',
         ]);
-        
+    
         DB::table('child_categories')->insert([
             'category_id' => 2,
             'name' => '洋服',
@@ -121,12 +121,7 @@ class Child_categoriesTableSeeder extends Seeder
 
         DB::table('child_categories')->insert([
             'category_id' => 8,
-            'name' => 'スポーツ',
-        ]);
-
-        DB::table('child_categories')->insert([
-            'category_id' => 8,
-            'name' => 'レジャー',
+            'name' => 'その他',
         ]);
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Item;
 use App\Models\Category;
 use App\Models\Condition;
 use App\Models\Like;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
@@ -14,13 +15,6 @@ class IndexController extends Controller
     {
         $items = Item::with('category', 'condition')->get()->sortBy('id');
 
-        $items = $items->map(function ($item){
-            $likeData = Like::where('user_id', $item->user_id)->where('item_id', $item->id)->exists();
-            $item->likeData = $likeData;
-
-            return $item;
-        });
-
-        return view('index', compact('items'));
+        return view('index', compact('items',));
     }
 }

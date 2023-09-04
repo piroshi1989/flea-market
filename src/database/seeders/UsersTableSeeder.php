@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' =>  now(),
             'password' => Hash::make('password'),
             'role' => 0,
-            'image_url' => 'https://source.unsplash.com/random/640x480',
+            'image_url' => 'https://loremflickr.com/640/480?lock=101',
         ]);
 
         DB::table('users')->insert([
@@ -33,7 +33,7 @@ class UsersTableSeeder extends Seeder
             'postcode' => '123-1111',
             'address' => '香川県三豊市高瀬町上高瀬786-11',
             'building_name' => '高瀬ビル201',
-            'image_url' => 'https://source.unsplash.com/random/640x480',
+            'image_url' => 'https://loremflickr.com/640/480?lock=102',
         ]);
 
 
@@ -46,7 +46,7 @@ class UsersTableSeeder extends Seeder
             'postcode' => '321-2132',
             'address' => '宮城県仙台市青葉区西勝山759-1',
             'building_name' => '勝山ヒルズ203',
-            'image_url' => 'https://source.unsplash.com/random/640x480',
+            'image_url' => 'https://loremflickr.com/640/480?lock=103',
         ]);
 
         DB::table('users')->insert([

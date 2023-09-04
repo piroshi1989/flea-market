@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Post;
+use App\Models\Contact;
 
-class PostsTableSeeder extends Seeder
+class ContactsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        Post::factory()->count(50)->create();
+        Contact::factory()->count(50)->create();
     }
 }
