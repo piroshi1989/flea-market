@@ -34,10 +34,10 @@
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">建物名</p>
-                <input type="text" name="buildingname">
+                <input type="text" name="building_name">
             </div>
             <div class="form__error">
-            @error('buildingname')
+            @error('building_name')
             {{ $message }}
             @enderror
             </div>

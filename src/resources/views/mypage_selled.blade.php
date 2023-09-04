@@ -17,8 +17,22 @@
     </div>
 </div>
 <div class= index__select>
-    <a href="/mypage/selled" class="non-color__select">出品した商品</a>
+    <a href="/mypage/selled" class="color__select">出品した商品</a>
     <a href="/mypage/purchased" class= "non-color__select">購入した商品</a>
 </div>
 <div class="line"></div>
+<div class="item__wrap">
+    @foreach($selledItems as $selledItem)
+    <div class="item__content">
+    <div class="item__image">
+        <a href="{{ asset('/item/' . $selledItem['id']) }}">
+            <img src="{{asset($selledItem['image_url'])}}">
+        </a>
+    </div>
+    <div class="item__info">
+        <p class="item__price">\ {{ $selledItem['price'] }}</p>
+    </div>
+    </div>
+    @endforeach
+</div>
 @endsection

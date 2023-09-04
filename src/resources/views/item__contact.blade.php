@@ -22,11 +22,8 @@
                 data-user-id="{{ Auth::id() }}"></i>
                 <span class= "like-count" id="like-count">{{ $likeCount }}</span>
             </div>
-            <div class="contacts__count">
-                <a class="icon-link" href={{ asset('/item/' . $item['id']) . '/contacts' }}>
-                <i class="bi bi-chat"></i>
-                </a>
-                <span class= "contact-count">{{ $contactCount }}</span>
+            <div class="posts__count">
+
             </div>
         </div>
         @endauth

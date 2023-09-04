@@ -26,10 +26,25 @@
     background: #5F5F5F;
 }
 
-.item{
-    border-radius: 4px;
-    background: #D9D9D9;
-    width: 200px;
-    height: 200px;
-    margin:20px;
+
+
+.likes {
+    position: absolute;
+    /* 要素を絶対位置に配置 */
+    top: 5px;
+    /* 上部に配置 */
+    right: 5px;
+    /* 右側に配置 */
+    font-size: 20px;
+    color: #ff3d67;
+    cursor: pointer;
+}
+
+.item__title{
+    color: #F00;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 30px;
 }

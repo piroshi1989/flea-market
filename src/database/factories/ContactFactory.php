@@ -3,15 +3,15 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Post;
-class PostFactory extends Factory
+use App\Models\Contact;
+class ContactFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array
      */
-    protected $model = Post::class;
+    protected $model = Contact::class;
     
     public function definition()
     {

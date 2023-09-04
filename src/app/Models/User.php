@@ -23,9 +23,9 @@ class User extends Authenticatable
         'password',
         'postcode',
         'address',
-        'buildingname',
+        'building_name',
         'role',
-        'imageUrl',
+        'image_url',
     ];
 
     /**
@@ -52,9 +52,9 @@ class User extends Authenticatable
         return $this->hasMany(Item::class);
     }
 
-    public function posts()
+    public function contacts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Contact::class);
     }
 
     public function likes()

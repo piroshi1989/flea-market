@@ -11,6 +11,9 @@
     font-weight: 700;
     line-height: normal;
     margin: 0 50px;
+    display: block;
+    text-decoration: none;
+    margin: 0 30px;
 }
 
 .non-color__select {
@@ -19,6 +22,9 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    display: block;
+    text-decoration: none;
+    margin: 0 30px;
 }
 
 .line {
@@ -42,11 +48,26 @@
 }
 
 .profile__image {
-    background-color: #5F5F5F;
-    width: 100px;
-    height: 100px;
-    padding: 50px;
+    width: 150px;
+    /* 画像の幅を適切なサイズに調整 */
+    height: 150px;
+    /* 画像の高さを適切なサイズに調整 */
     border-radius: 50%;
+    /* 画像を円形にするための角丸設定 */
+    overflow: hidden;
+    /* 画像を円形にクリップするためにオーバーフローを隠す */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile__image img {
+    width: 100%;
+    /* 画像を .profile__image 要素の幅に合わせる */
+    height: 100%;
+    /* 画像を .profile__image 要素の高さに合わせる */
+    object-fit: cover;
+    /* 画像をアスペクト比を保ちつつクリップするように調整 */
 }
 
 .profile__image-button {

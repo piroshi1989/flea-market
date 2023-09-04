@@ -10,20 +10,26 @@
     <a href="/mylist" class= "non-color__select">マイリスト</a>
 </div>
 <div class="line"></div>
+@if($likedItems->isNotEmpty())
+<p class="item__title">
+お気に入り
+</p>
 <div class="item__wrap">
-  @foreach($items as $item)
+  @foreach($likedItems as $likedItem)
   <div class="item__content">
     <div class="item__image">
-      <a href="{{ asset('/item/' . $item['id']) }}">
-        <img src="{{asset($item['image_url'])}}">
+      <a href="{{ asset('/item/' . $likedItem['id']) }}">
+        <img src="{{asset($likedItem['image_url'])}}">
       </a>
     </div>
     <div class="item__info">
-      <p class="item__price">\ {{ $item['price'] }}</p>
+      <p class="item__price">\ {{ $likedItem['price']}}</p>
     </div>
   </div>
   @endforeach
 </div>
+@endif
+
 
 
 <script>
