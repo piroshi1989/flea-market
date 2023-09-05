@@ -43,4 +43,6 @@ Route::middleware('auth')->group(function () {
   Route::get('/getLikeCount/{itemId}', [LikeController::class, 'getLikeCount']);
   Route::get('/getLikeCount/{itemId}', [LikeController::class, 'getLikeCount']);
 
+  Route::post('/contact/store', [ContactController::class, 'storeContact']);
+  Route::delete('/contact/delete', [ContactController::class, 'destroyContact']);
 });

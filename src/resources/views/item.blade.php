@@ -13,13 +13,17 @@
         <p class="item__name">{{ $item['name'] }}</p>
         <p class="item__brand">ブランド</p>
         <p class="item__price_detail">¥{{ $item['price'] }}(値段)</p>
-        @auth
         <div class="counter__icons">
             <div class="likes__count">
+                @auth
                 <i class="bi bi-star like-toggle"
                 data-like-id="{{ $likeData}}"
                 data-item-id="{{ $item['id'] }}"
                 data-user-id="{{ Auth::id() }}"></i>
+                @endauth
+                @guest
+                <i class="bi bi-star like-toggle"></i>
+                @endguest
                 <span class= "like-count" id="like-count">{{ $likeCount }}</span>
             </div>
             <div class="contacts__count">
@@ -29,7 +33,6 @@
                 <span class= "contact-count">{{ $contactCount }}</span>
             </div>
         </div>
-        @endauth
         <div class="form__content">
                 <a href="/parchase" class="form__button-submit">購入する
                 </a>
