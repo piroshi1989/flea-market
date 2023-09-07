@@ -33,9 +33,15 @@
                 <span class= "contact-count">{{ $contactCount }}</span>
             </div>
         </div>
+        
         <div class="form__content">
-                <a href="/parchase" class="form__button-submit">購入する
-                </a>
+            @if(!$soldOutInfo)
+            <a href={{ asset('/purchase/' . $item['id'])}} class="form__button-submit">購入する
+            </a>
+            @else
+            <a class="form__button-submit">売却済です
+            </a>
+            @endif
         </div>
         <h3 class="item__description">商品説明</h3>
         <p class="description__detail">{{ $item['detail'] }}

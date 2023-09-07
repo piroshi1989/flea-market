@@ -8,6 +8,7 @@ use App\Models\Contact;
 use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\Condition;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 use App\Http\Requests\ItemRequest;
 use Illuminate\Support\Facades\Auth;
@@ -23,8 +24,10 @@ class ItemController extends Controller
 
         // 問い合わせのカウントを取得
     $contactCount = Contact::where('item_id', $item->id)->count();
+    
+    $soldOutInfo = Sale::where('item_id', $item->id)->first();
 
-        return view('item', compact('item', 'likeData', 'likeCount', 'contactCount'));
+        return view('item', compact('item', 'likeData', 'likeCount', 'contactCount', 'soldOutInfo'));
     }
 
     public function showSellItem(){

@@ -7,8 +7,10 @@
 @section('content')
 <div class="form__content">
     <h2 class="form__heading">住所の変更</h2>
-    <form class="form" action="/address" method="post">
+    <form class="form" action="/address/change" method="post">
         @csrf
+        <input type="hidden" name="name" value="{{ $user['name'] }}">
+        <input type="hidden" name="item_id" value="{{ $item['id'] }}">
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">郵便番号</p>
@@ -23,7 +25,7 @@
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">住所</p>
-                <input type="text" name="address">
+                <input type="text" name="address" value="{{ old('address') }}">
             </div>
             <div class="form__error">
             @error('address')
@@ -34,7 +36,7 @@
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">建物名</p>
-                <input type="text" name="building_name">
+                <input type="text" name="building_name" value="{{ old('building_name') }}">
             </div>
             <div class="form__error">
             @error('building_name')
