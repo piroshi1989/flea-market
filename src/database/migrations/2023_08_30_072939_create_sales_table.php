@@ -16,13 +16,14 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('item_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('item_id')->unique()->constrained()->cascadeOnDelete();
             $table->integer('payment_amount');
             $table->foreignId('payment_method_id')->constrained()->cascadeOnDelete();
             $table->string('shipping_name');
             $table->string('postcode');
             $table->string('address');
-            $table->string('building_name');
+            $table->string('building_name')->nullable();
+            $table->integer('payment_code')->nullable();
             $table->timestamps();
         });
     }

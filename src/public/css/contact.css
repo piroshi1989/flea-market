@@ -1,0 +1,52 @@
+.profile__image {
+    width: 40px;
+    /* 画像の幅を適切なサイズに調整 */
+    height: 40px;
+    /* 画像の高さを適切なサイズに調整 */
+    border-radius: 50%;
+    /* 画像を円形にするための角丸設定 */
+    overflow: hidden;
+    /* 画像を円形にクリップするためにオーバーフローを隠す */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #D9D9D9;
+}
+
+.contact__comment{
+    border-radius: 4px;
+    background: #D9D9D9;
+    margin:10px 0;
+    padding: 10px;
+}
+
+.profile__name{
+    font-size: 20px;
+    font-weight: 700;
+    margin:auto 10px;
+}
+
+.profile__content{
+    display: flex;
+    align-items: center;
+    width:100%;
+}
+
+.profile__content.right-align {
+    justify-content:right;
+}
+
+.item-contact__wrap{
+    width:50%;
+}
+
+.input__title{
+    font-size: 20px;
+    font-weight: 700;
+    
+}
+
+.form__error {
+    color: red;
+    margin: 0 10px;
+}

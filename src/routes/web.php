@@ -7,6 +7,10 @@ use App\Http\Controllers\MypageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\PaymentMethodController;
+use App\Http\Controllers\AddressController;
+use App\Http\Controllers\StripePaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,4 +47,17 @@ Route::middleware('auth')->group(function () {
   Route::get('/getLikeCount/{itemId}', [LikeController::class, 'getLikeCount']);
   Route::get('/getLikeCount/{itemId}', [LikeController::class, 'getLikeCount']);
 
+  Route::post('/contact/store', [ContactController::class, 'storeContact']);
+  Route::delete('/contact/delete', [ContactController::class, 'destroyContact']);
+  
+  Route::get('/purchase/{id}', [PurchaseController::class, 'showPurchase']);
+  Route::get('/paymentmethod/{id}', [PaymentMethodController::class, 'showPaymentMethod']);
+  Route::post('/paymentmethod/select', [PaymentMethodController::class, 'selectPaymentMethod']);
+  Route::get('/address/{id}', [AddressController::class, 'showAddress']);
+  Route::post('/address/change', [AddressController::class, 'changeAddress']);
+  Route::post('/purchase/confirm', [PurchaseController::class, 'confirm']);
+  Route::post('/purchase/thanks', [PurchaseController::class, 'storePurchase']);
+  
+    Route::get('/payment/{id}', [StripePaymentController::class, 'create']);
+    Route::post('/payment/store', [StripePaymentController::class, 'store']);
 });
