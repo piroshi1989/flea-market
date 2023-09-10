@@ -38,6 +38,8 @@
             @if(!$soldOutInfo)
             <a href={{ asset('/purchase/' . $item['id'])}} class="form__button-submit">購入する
             </a>
+            @elseif($item->user['id'] === $userId)
+            <p>出品商品です</p>
             @else
             <a class="form__button-submit">売却済です
             </a>

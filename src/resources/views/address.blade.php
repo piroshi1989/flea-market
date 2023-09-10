@@ -7,14 +7,15 @@
 @section('content')
 <div class="form__content">
     <h2 class="form__heading">住所の変更</h2>
-    <form class="form" action="/address/change" method="post">
+    <form class="form h-adr" action="/address/change" method="post">
         @csrf
         <input type="hidden" name="name" value="{{ $user['name'] }}">
         <input type="hidden" name="item_id" value="{{ $item['id'] }}">
+        <span class="p-country-name" style="display:none;">Japan</span>
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">郵便番号</p>
-                <input type="text" name="postcode" value="{{ old('postcode') }}">
+                <input type="text" class="p-postal-code" name="postcode" value="{{ old('postcode') }}">
             </div>
             <div class="form__error">
             @error('postcode')
@@ -25,7 +26,7 @@
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">住所</p>
-                <input type="text" name="address" value="{{ old('address') }}">
+                <input type="text" class="p-region p-locality p-street-address p-extended-address" name="address" value="{{ old('address') }}">
             </div>
             <div class="form__error">
             @error('address')
@@ -49,4 +50,6 @@
         </div>
     </form>
 </div>
+<script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+
 @endsection

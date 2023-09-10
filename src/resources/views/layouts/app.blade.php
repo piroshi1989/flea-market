@@ -74,13 +74,20 @@
             <button class="header-nav__button" type="submit">ログアウト</button>
             </form>
         </li>
+        @endif
+        @can('user')
         <li class="header-nav__item">
             <a class="header-nav__link" href="/mypage">マイページ</a>
         </li>
-        @endif
         <li class="header-nav__item">
             <a class="header-nav__link sell" href="/sell">出品</a>
         </li>
+        @endcan
+        @can('admin')
+        <li class="header-nav__item">
+            <a class="header-nav__link sell" href="/management">管理画面</a>
+        </li>
+        @endcan
     </ul>
 </nav>
         </div>
