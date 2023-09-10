@@ -26,8 +26,9 @@ Route::get('/', [IndexController::class, 'index']);
 Route::get('/item/{id}', [ItemController::class, 'showDetailItem'])->name('item');
 Route::get('/item/{id}/contacts', [ContactController::class, 'showItemContact'])->name('item__contact');
 
-//Route::middleware('verified')->group(function () {
-Route::middleware('auth')->group(function () {
+Route::middleware('verified')->group(function () {
+//Route::middleware('auth')->group(function () {
+  Route::get('/user', [IndexController::class, 'index']);
   Route::get('/mypage', [MyPageController::class, 'showMypage']);
   Route::get('/mylist', [ItemController::class, 'showLikedItem']);
   Route::get('/mypage/profile', [ProfileController::class, 'showProfile']);

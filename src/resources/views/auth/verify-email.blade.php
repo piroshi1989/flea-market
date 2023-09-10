@@ -6,7 +6,7 @@
         <div class="col-md-5 col-sm-12 mx-auto">
             <div class="card py-4">
                 <div class="card-body">
-                    {{--Inform user after click resend verification email button is successful <--- this  --}} 
+                    {{--Inform user after click resend verification email button is successful <--- this  --}}
                     @if (session('status') == 'verification-link-sent')
                         <div class="alert alert-success text-center">新しいメール認証リンクが送信されました！</div>
                     @endif
