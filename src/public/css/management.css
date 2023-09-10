@@ -1,0 +1,61 @@
+/* テーブル全体のスタイル */
+.item-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+}
+
+/* ヘッダー行のスタイル */
+.item-table__header {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* ヘッダーの文字スタイル */
+.item-table__header-span {
+    color: #333;
+}
+
+/* 行の背景色を交互に変えるスタイル */
+.item-table__row:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* 行のスタイル */
+.item-table__row {
+    border: 1px solid #ddd;
+}
+
+/* セルのスタイル */
+.item-table__item {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* 数字列のセルのスタイル（右寄せ） */
+.number-column {
+    text-align: right;
+}
+
+/* リンクのスタイル（任意でカスタマイズ） */
+.item-table__item a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* ホバー時のリンクのスタイル（任意でカスタマイズ） */
+.item-table__item a:hover {
+    text-decoration: underline;
+}
+
+.paginate__links{
+    width:30%;
+    display: block;
+    margin:0 auto;
+}

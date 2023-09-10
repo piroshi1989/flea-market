@@ -20,14 +20,16 @@ class ItemController extends Controller
         $likeData = Like::where('user_id', $item->user_id)->where('item_id', $item->id)->first();
 
         // お気に入りのカウントを取得
-    $likeCount = Like::where('item_id', $item->id)->count();
+        $likeCount = Like::where('item_id', $item->id)->count();
 
         // 問い合わせのカウントを取得
-    $contactCount = Contact::where('item_id', $item->id)->count();
+        $contactCount = Contact::where('item_id', $item->id)->count();
     
-    $soldOutInfo = Sale::where('item_id', $item->id)->first();
+        $soldOutInfo = Sale::where('item_id', $item->id)->first();
 
-        return view('item', compact('item', 'likeData', 'likeCount', 'contactCount', 'soldOutInfo'));
+        $userId = Auth::id();
+
+        return view('item', compact('item', 'likeData', 'likeCount', 'contactCount', 'soldOutInfo','userId'));
     }
 
     public function showSellItem(){

@@ -15,7 +15,7 @@
         <div class="item__image">
             <img src="{{asset($item['image_url'])}}">
         </div>
-        <div class= "item-contact__wrap">
+        < class= "item-contact__wrap">
     <div class="item__detail">
         <p class="item__name">{{ $item['name'] }}</p>
         <p class="item__brand">ブランド</p>
@@ -71,7 +71,7 @@
         <form class="form" method="POST" action="/contact/store">
         @csrf
         <input type="hidden" name="item_id" value="{{ $item['id'] }}">
-         <div class="form__group">
+        <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">商品へのコメント</p>
                 <textarea name="comment" value="{{ old('comment') }}"></textarea>
@@ -85,8 +85,7 @@
         <div class="form__button">
         <button class="form__button-submit" type="submit">コメントを送信する</button>
         </div>
-    </form>
-    </div>
+        </form>
     </div>
 </div>
 

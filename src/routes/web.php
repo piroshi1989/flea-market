@@ -11,6 +11,8 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ManagementController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,8 +28,9 @@ Route::get('/', [IndexController::class, 'index']);
 Route::get('/item/{id}', [ItemController::class, 'showDetailItem'])->name('item');
 Route::get('/item/{id}/contacts', [ContactController::class, 'showItemContact'])->name('item__contact');
 
-//Route::middleware('verified')->group(function () {
-Route::middleware('auth')->group(function () {
+Route::middleware('verified')->group(function () {
+//Route::middleware('auth')->group(function () {
+  Route::get('/user', [IndexController::class, 'index']);
   Route::get('/mypage', [MyPageController::class, 'showMypage']);
   Route::get('/mylist', [ItemController::class, 'showLikedItem']);
   Route::get('/mypage/profile', [ProfileController::class, 'showProfile']);
@@ -58,6 +61,11 @@ Route::middleware('auth')->group(function () {
   Route::post('/purchase/confirm', [PurchaseController::class, 'confirm']);
   Route::post('/purchase/thanks', [PurchaseController::class, 'storePurchase']);
   
-    Route::get('/payment/{id}', [StripePaymentController::class, 'create']);
-    Route::post('/payment/store', [StripePaymentController::class, 'store']);
+  Route::get('/payment/{id}', [StripePaymentController::class, 'create']);
+  Route::post('/payment/store', [StripePaymentController::class, 'store']);
+  //管理者
+  Route::group(['middleware' => ['can:admin']], function () {
+    Route::get('/management', [ManagementController::class, 'showManagement']);
+    Route::post('/management/store', [AdminController::class, 'storeAdmin']);
+  });
 });

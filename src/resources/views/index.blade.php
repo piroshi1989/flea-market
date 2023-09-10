@@ -9,7 +9,7 @@
     <p class="color__select">おすすめ</p>
     <a href="/mylist" class= "non-color__select">マイリスト</a>
 </div>
-<div class="line"></div>
+<hr>
 <div class="item__wrap">
   @foreach($items as $item)
   <div class="item__content">
