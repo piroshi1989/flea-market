@@ -193,7 +193,7 @@
 <hr>
 <div class="form__content">
     <h2 class="form__heading">メール作成</h2>
-    <form class="form" method="POST" action="/mail/confirm">
+    <form class="form" method="POST" action="mail/confirm">
         @csrf
         <div class="form__group">
             <div class="form__group-content">
@@ -209,7 +209,7 @@
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">本文</p>
-                <textarea name="body" value="{{ old('body') }}"></textarea>
+                <textarea name="body">{{ old('body') }}</textarea>
             </div>
             <div class="form__error">
             @error('body')

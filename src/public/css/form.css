@@ -85,3 +85,7 @@
 #fileInput {
     display: none;
 }
+
+.mail__body{
+    height:20vh;
+}
