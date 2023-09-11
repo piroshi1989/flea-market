@@ -13,6 +13,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ManagementController;
+use App\Http\Controllers\SendMailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,5 +68,8 @@ Route::middleware('verified')->group(function () {
   Route::group(['middleware' => ['can:admin']], function () {
     Route::get('/management', [ManagementController::class, 'showManagement']);
     Route::post('/management/store', [AdminController::class, 'storeAdmin']);
+    //メール送信用
+    Route::post('/mail/confirm',[SendMailController::class,'confirmNoticeMail']);
+    Route::post('/mail/send',[SendMailController::class,'sendNoticeMail']);
   });
 });
