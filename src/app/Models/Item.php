@@ -9,7 +9,7 @@ class Item extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'image_url', 'price', 'category_id', 'child_category_id', 'condition_id', 'user_id', 'detail'];
+    protected $fillable = ['name', 'image_url', 'price', 'category_id', 'child_category_id', 'condition_id','brand_id', 'user_id', 'detail'];
 
     public function user()
     {
@@ -24,6 +24,11 @@ class Item extends Model
     public function childCategory()
     {
         return $this->belongsTo(ChildCategory::class);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
     }
 
     public function condition()
@@ -41,27 +46,27 @@ class Item extends Model
         return $this->hasMany(Like::class);
     }
 
-    public function sales()
+    public function sale()
     {
-        return $this->hasMany(Sale::class);
+    return $this->hasOne(Sale::class, 'item_id');
     }
 
     //いいねされているかを判定するメソッド。
-    public function isLikedBy($user_id): bool
+    public function isLikedBy($userId): bool
     {
     // この店舗をお気に入り登録しているかを判定
-    return $this->likes->contains('user_id', $user_id);
+    return $this->likes->contains('user_id', $userId);
     }
 
     //検索用
-    public function scopeShopsSearch($query, $category_id=null, $condition_id=null,  $keyword=null)
+    public function scopeShopsSearch($query, $categoryId=null, $brandId=null,  $keyword=null)
     {
-        if($category_id){
-            $query->where('category_id', $category_id);
+        if($categoryId){
+            $query->where('category_id', $categoryId);
         }
 
-        if($condition_id){
-            $query->where('condition_id', $condition_id);
+        if($brandId){
+            $query->where('brand_id', $brandId);
         }
 
         if($keyword){

@@ -20,8 +20,10 @@ class ItemFactory extends Factory
     public function definition()
     {
         $image_url = 'https://loremflickr.com/640/480?lock=' . $this->faker->numberBetween(1,100);
+        //ダミーイメージはloremflickrから取得する
         $category = Category::find($this->faker->numberBetween(1, 8));
         $childCategoryIds = ChildCategory::where('category_id', $category->id)->pluck('id')->toArray();
+        //childCategoryは親のcategory_idを検索したのち取得
 
         return [
             'name' => $this->faker->word,
@@ -30,7 +32,8 @@ class ItemFactory extends Factory
             'category_id' => $category->id,
             'child_category_id' => Arr::random($childCategoryIds),
             'condition_id' => $this->faker->numberBetween(1,6),
-            'user_id' => $this->faker->numberBetween(1,2),
+            'brand_id' => $this->faker->numberBetween(1,10),
+            'user_id' => $this->faker->numberBetween(1,5),
             'detail' => $this->faker->realText(200),
         ];
     }

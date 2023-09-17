@@ -54,6 +54,24 @@
         </div>
         <div class="form__group">
             <div class="form__group-content">
+                <p class="input__title">ブランド名</p>
+                <select name="brand_id" class="brand_id">
+                    <option>選択してください</option>
+                    @foreach($brands as $brand)
+                    <option class="brands__option" value="{{ $brand->id}}">
+                        {{ $brand->name }}
+                    </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form__error">
+            @error('brand')
+            {{ $message }}
+            @enderror
+            </div>
+        </div>
+        <div class="form__group">
+            <div class="form__group-content">
                 <p class="input__title">商品の状態</p>
                 <select name="condition_id" class="condition_id">
                     <option>選択してください</option>

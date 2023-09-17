@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +13,7 @@ class AddressController extends Controller
     {
         $item = Item::findOrFail($id);
         $user = User::findOrFail(Auth::id());
-        
+
         return view('address',compact('item','user'));
     }
 
@@ -27,11 +26,10 @@ class AddressController extends Controller
             'building_name' => $request->building_name,
         ];
 
-        
-        $item = Item::findOrFail($request->item_id);
-
+        //配送先の変更はsessionで取得
         session(['previous_shipping_info' => $shippingInfo]);
+        //配送先の変更はsessionで取得
 
-        return redirect('/purchase/' . $item['id'])->with('message', '配送先を変更しました');
+        return redirect('/purchase/' . $request->item_id)->with('message', '配送先を変更しました');
     }
 }

@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Auth;
 class ProfileController extends Controller
 {
     public function showProfile(){
-        $user_id = Auth::id();
-        $user = User::findOrFail($user_id);
+        $userId = Auth::id();
+        $user = User::findOrFail($userId);
 
         return view('profile', compact('user'));
     }
@@ -42,12 +42,12 @@ class ProfileController extends Controller
     }
 
     public function updateProfile(ProfileRequest $request){
-        $user_id=Auth::id();
+        $userId=Auth::id();
         $formType = $request->input('form_type');
         if ($formType === 'profile_form') {
             $form = $request->all();
             unset($form['_token']);
-            User::find($user_id)->update($form);
+            User::find($userId)->update($form);
             
             return redirect('/mypage/profile')->with('message', 'プロフィール設定を更新しました');
         }
