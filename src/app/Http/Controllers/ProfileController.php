@@ -4,16 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\Brand;
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public function showProfile(){
+    public function showProfile(Request $request){
         $userId = Auth::id();
         $user = User::findOrFail($userId);
 
-        return view('profile', compact('user'));
+        $categories = Category::all();
+        $brands = Brand::all();
+
+        $selectedCategory = $request->input('category');
+        $selectedBrand = $request->input('brand');
+
+        return view('profile', compact('user', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
     }
 
     public function uploadProfileImage(Request $request)

@@ -49,12 +49,30 @@
             </a>
         </div>
         <div class="header__item">
-        <div class= "search__form">
-    <form method="post" action="/search">
-    @csrf
-    <div class="form__content">
-        <input type="text" class="keyword" name="keyword" placeholder=なにをお探しですか？>
-        <input type="submit" class="submit-button">
+<div class="search__form">
+    <form method="post" action="/search" id="searchForm">
+        @csrf
+        <div class="form__content">
+            <input type="hidden" name="form__type" value="search__form">
+            <select name="category" class="category">
+                <option value="">カテゴリー</option>
+                @foreach($categories as $category)
+                <option class="categories__option" value="{{ $category->id}}" {{ $selectedCategory == $category->id ? 'selected' : '' }}>
+                {{ $category->name }}
+                </option>
+                @endforeach
+            </select>
+            <select name="brand" class="brand">
+                <option value="">ブランド</option>
+                @foreach($brands as $brand)
+                <option class="brands__option" value="{{ $brand->id}}" {{ $selectedBrand == $brand->id ? 'selected' : '' }}>
+                    {{ $brand->name }}
+                </option>
+                @endforeach
+            </select>
+            <input type="text" class="keyword" name="keyword" placeholder="なにをお探しですか?" onkeydown="return handleEnterKey(event)">
+            <input type="submit" class="submit-button">
+        </div>
     </form>
 </div>
 <nav>
@@ -97,18 +115,19 @@
     @yield('content')
     </main>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  var form = document.querySelector(".form");
-  var keywordInput = document.querySelector(".keyword");
+function handleEnterKey(event) {
+    // イベントからキーコードを取得
+    var keyCode = event.keyCode || event.which;
 
-  // キーワード入力欄でEnterキーが押されたときにフォームを送信
-  keywordInput.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-      event.preventDefault(); // デフォルトの送信動作をキャンセル
-      form.submit(); // フォームを送信
+    // Enterキーのキーコードは 13
+    if (keyCode === 13) {
+        // フォームを送信
+        document.getElementById('searchForm').submit();
+        return false; // デフォルトの動作をキャンセル
     }
-  });
-});
+
+    return true; // 他のキーはそのまま処理
+}
 </script>
 </body>
 </html>

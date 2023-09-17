@@ -8,17 +8,21 @@ use App\Models\Condition;
 use App\Models\Brand;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ItemRequest;
+use Illuminate\Http\Request;
 
 class SellController extends Controller
 {
-    public function showSell()
+    public function showSell(Request $request)
     {
         $categories = Category::all();
         $conditions = Condition::all();
         $brands = Brand::all();
         $child_categories = ChildCategory::all();
 
-        return view('sell', compact('categories','child_categories', 'conditions','brands'));
+        $selectedCategory = $request->input('category');
+        $selectedBrand = $request->input('brand');
+
+        return view('sell', compact('categories','child_categories', 'conditions','brands', 'selectedCategory', 'selectedBrand'));
     }
 
     public function storeSell(ItemRequest $request)

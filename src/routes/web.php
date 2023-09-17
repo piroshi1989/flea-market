@@ -18,6 +18,7 @@ use App\Http\Controllers\FollowingController;
 use App\Http\Controllers\MyListController;
 use App\Http\Controllers\RecommendController;
 use App\Http\Controllers\SellController;
+use App\Http\Controllers\SearchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +31,8 @@ use App\Http\Controllers\SellController;
 */
 
 Route::get('/', [IndexController::class, 'index']);
+Route::post('/search', [SearchController::class, 'searchItems']);
+Route::get('/search', [SearchController::class, 'searchItems']);
 Route::get('/item/{id}', [ItemController::class, 'showDetailItem'])->name('item');
 Route::get('/item/{id}/contacts', [ContactController::class, 'showContact'])->name('item__contact');
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\Brand;
 use App\Models\PaymentMethod;
 use App\Models\Sale;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +14,7 @@ use App\Http\Requests\PurchaseRequest;
 
 class PurchaseController extends Controller
 {
-    public function showPurchase($id){
+    public function showPurchase($id, Request $request){
         $item = Item::findOrFail($id);
         $paymentMethod = PaymentMethod::get()->first();
         
@@ -26,16 +28,27 @@ class PurchaseController extends Controller
             'building_name' => $user->building_name,
         ];
         
-        return view('purchase', compact('item','paymentMethod','shippingInfo', 'userId'));
+        $categories = Category::all();
+        $brands = Brand::all();
+
+        $selectedCategory = $request->input('category');
+        $selectedBrand = $request->input('brand');
+        
+        return view('purchase', compact('item','paymentMethod','shippingInfo', 'userId', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
     }
 
     public function confirm(PurchaseRequest $request)
     {
         $purchaseInfo = $request->all();
         $paymentMethod_name = PaymentMethod::findOrFail($purchaseInfo['payment_method_id'])->name;
-        
 
-        return view('purchase__confirm',compact('purchaseInfo', 'paymentMethod_name'));
+        $categories = Category::all();
+        $brands = Brand::all();
+
+        $selectedCategory = $request->input('category');
+        $selectedBrand = $request->input('brand');
+
+        return view('purchase__confirm',compact('purchaseInfo', 'paymentMethod_name', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
     }
 
     public function storePurchase(Request $request)
@@ -61,7 +74,13 @@ class PurchaseController extends Controller
         $saleInfo = Sale::where('item_id', $request->item_id)->first();
         $salePaymentMethodId = $saleInfo['payment_method_id'];
 
-        return view('purchase__thanks', compact('saleInfo',));
+        $categories = Category::all();
+        $brands = Brand::all();
+
+        $selectedCategory = $request->input('category');
+        $selectedBrand = $request->input('brand');
+
+        return view('purchase__thanks', compact('saleInfo','categories', 'brands', 'selectedCategory', 'selectedBrand'));
     }
 
 }

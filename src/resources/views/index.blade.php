@@ -13,6 +13,7 @@
 <form method="GET" action="/" id="form">
   <div class="form__wrap">
   <div class="form__content">
+    <input type="hidden" name="form__type" value="sort__form">
     <input type="checkbox" name="hideSold" id="hideSold" {{ request()->has('hideSold') ? 'checked' : '' }}>
     <label for="hideSold">売却済みを非表示</label>
     <br>
