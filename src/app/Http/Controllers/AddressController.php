@@ -4,17 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Item;
+use App\Models\Category;
+use App\Models\Brand;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\AddressRequest;
 
 class AddressController extends Controller
 {
-    public function showAddress($id)
+    public function showAddress($id, Request $request)
     {
         $item = Item::findOrFail($id);
         $user = User::findOrFail(Auth::id());
 
-        return view('address',compact('item','user'));
+        $categories = Category::all();
+        $brands = Brand::all();
+
+        $selectedCategory = $request->input('category');
+        $selectedBrand = $request->input('brand');
+
+        return view('address',compact('item','user', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
     }
 
     public function changeAddress(AddressRequest $request)

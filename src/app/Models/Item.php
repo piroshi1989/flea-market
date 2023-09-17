@@ -59,7 +59,7 @@ class Item extends Model
     }
 
     //検索用
-    public function scopeShopsSearch($query, $categoryId=null, $brandId=null,  $keyword=null)
+    public function scopeItemsSearch($query, $categoryId=null, $brandId=null,  $keyword=null)
     {
         if($categoryId){
             $query->where('category_id', $categoryId);

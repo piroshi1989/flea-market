@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Contact;
 use App\Models\Like;
+use App\Models\Category;
+use App\Models\Brand;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ContactRequest;
 
 class ContactController extends Controller
 {
-    public function showContact($id)
+    public function showContact($id, Request $request)
     {
         $item = Item::findOrFail($id);
         $likeData = Like::where('user_id', $item->user_id)->where('item_id', $item->id)->first();
@@ -23,7 +25,13 @@ class ContactController extends Controller
 
         $contacts = Contact::where('item_id', $item->id)->get();
 
-        return view('item__contact', compact('item', 'likeData', 'likeCount', 'contactCount','contacts'));
+        $categories = Category::all();
+        $brands = Brand::all();
+
+        $selectedCategory = $request->input('category');
+        $selectedBrand = $request->input('brand');
+
+        return view('item__contact', compact('item', 'likeData', 'likeCount', 'contactCount','contacts', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
     }
 
     public function storeContact(ContactRequest $request)

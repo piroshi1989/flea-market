@@ -13,7 +13,11 @@
 <div class="profile__content">
     <div class="profile__inner">
         <div class="profile__image">
+            @empty($user['image_url'])
+            <i class="bi bi-person-circle"></i>
+            @else
             <img src="{{asset($user['image_url'])}}">
+            @endempty
         </div>
         <p class="user__name">{{ $user->name }}</p>
     </div>
@@ -31,11 +35,11 @@
     @foreach($followingUsers as $followingUser)
     <div class= "following__content">
         <div class="following__image">
-            @if(!empty($followingUser['image_url']))
-            <img src="{{asset($followingUser['image_url'])}}">
-            @else
+            @empty($followingUser['image_url'])
             <i class="bi bi-person-circle"></i>
-            @endif
+            @else
+            <img src="{{asset($followingUser['image_url'])}}">
+            @endempty
         </div>
         <p class="following__name">{{ $followingUser['name'] }}</p>
     <form class="delete-form" action="/following/delete" method="POST">

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Category;
+use App\Models\Brand;
 use App\Models\Sale;
-use App\Models\Like;
-use App\Models\Following;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -59,6 +58,12 @@ class IndexController extends Controller
             return $item;
         });
 
-        return view('index', compact('items'));
+        $categories = Category::all();
+        $brands = Brand::all();
+
+        $selectedCategory = $request->input('category');
+        $selectedBrand = $request->input('brand');
+
+        return view('index', compact('items', 'categories', 'brands','selectedCategory', 'selectedBrand'));
     }
 }

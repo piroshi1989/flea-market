@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Like;
+use App\Models\Category;
+use App\Models\Brand;
 use App\Models\Item;
 use App\Models\Sale;
 use Illuminate\Support\Facades\Auth;
 
 class RecommendController extends Controller
 {
-    public function showRecommend()
+    public function showRecommend(Request $request)
     {
         $viewedCategories = session('viewed_item_categories', []);
 
@@ -24,6 +26,12 @@ class RecommendController extends Controller
             return $recommendedItem;
         });
 
-        return view('recommend', compact('recommendedItems'));
+        $categories = Category::all();
+        $brands = Brand::all();
+
+        $selectedCategory = $request->input('category');
+        $selectedBrand = $request->input('brand');
+
+        return view('recommend', compact('recommendedItems', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
     }
 }
