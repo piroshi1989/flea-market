@@ -19,6 +19,7 @@
 <div class= index__select>
     <a href="/mypage/selled" class="color__select">出品した商品</a>
     <a href="/mypage/purchased" class= "non-color__select">購入した商品</a>
+    <a href="/mypage/following" class= "non-color__select">フォローしたユーザー</a>
 </div>
 <div class="line"></div>
 <div class="item__wrap">

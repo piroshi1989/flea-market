@@ -11,11 +11,11 @@
     {{session('message')}}
 </div>
 @endif
-<div class= "item__content">
+<div class = "item__content">
         <div class="item__image">
             <img src="{{asset($item['image_url'])}}">
         </div>
-        < class= "item-contact__wrap">
+        <div class= "item-contact__wrap">
     <div class="item__detail">
         <p class="item__name">{{ $item['name'] }}</p>
         <p class="item__brand">ブランド</p>
@@ -68,6 +68,7 @@
             </form>
         @endif
         @endforeach
+        @can('user')
         <form class="form" method="POST" action="/contact/store">
         @csrf
         <input type="hidden" name="item_id" value="{{ $item['id'] }}">
@@ -86,23 +87,11 @@
         <button class="form__button-submit" type="submit">コメントを送信する</button>
         </div>
         </form>
+        @endcan
     </div>
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  var form = document.querySelector(".form");
-  var keywordInput = document.querySelector(".keyword");
 
-  // キーワード入力欄でEnterキーが押されたときにフォームを送信
-  keywordInput.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-      event.preventDefault(); // デフォルトの送信動作をキャンセル
-      form.submit(); // フォームを送信
-    }
-  });
-});
-</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ asset('js/ajaxlike.js') }}"></script>
 @endsection

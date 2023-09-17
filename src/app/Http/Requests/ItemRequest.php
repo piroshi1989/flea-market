@@ -26,6 +26,7 @@ class ItemRequest extends FormRequest
         return [
             'category_id' => ['required', 'integer', 'exists:categories,id'],
             'condition_id' => ['required', 'integer', 'exists:conditions,id'],
+            'brand_id' => ['required', 'integer',],
             'name' => ['required', 'string' , 'max:80'],
             'detail' => ['required', 'string', 'max:10000'],
             'price' => ['required', 'integer', 'min:300','max:10000000'],
@@ -36,6 +37,7 @@ class ItemRequest extends FormRequest
     {
         return [
             'category_id.required' => 'カテゴリーを選択してください',
+            'brand_id.required' => 'ブランドを選択してください',
             'condition_id.required' => '商品の状態を選択してください',
             'name.required' => '商品名を入力してください',
             'name.max' => '商品名を全角40文字以下で入力してください',

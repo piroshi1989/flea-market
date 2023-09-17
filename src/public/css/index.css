@@ -10,6 +10,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    text-decoration: none;
     margin:0 50px;
 }
 
@@ -19,14 +20,9 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    text-decoration: none;
+    margin:0 30px;
 }
-
-.line{
-    height:2px;
-    background: #5F5F5F;
-}
-
-
 
 .likes {
     position: absolute;
@@ -47,4 +43,31 @@
     font-weight: 700;
     line-height: normal;
     margin: 30px;
+}
+
+.soldout-label {
+    background-color: red;
+    /* 赤い背景色 */
+    color: white;
+    /* 白いテキスト色 */
+    padding: 5px 10px;
+    /* パディングを追加してラベルを装飾 */
+    border-radius: 5px;
+    /* 角丸のボーダー */
+    position: absolute;
+    /* 絶対位置指定 */
+    top: 10px;
+    /* 上から10pxの位置に配置 */
+    left: 10px;
+    /* 左から10pxの位置に配置 */
+    z-index: 1;
+    /* オーバーレイの要素よりも手前に表示 */
+}
+
+.form__wrap{
+    font-size:20px;
+    font-weight: 400;
+    display: flex;
+    margin-left:auto;
+    width:50%;
 }

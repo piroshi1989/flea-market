@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\MypageController;
+use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ContactController;
@@ -14,6 +14,10 @@ use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\SendMailController;
+use App\Http\Controllers\FollowingController;
+use App\Http\Controllers\MyListController;
+use App\Http\Controllers\RecommendController;
+use App\Http\Controllers\SellController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,20 +31,22 @@ use App\Http\Controllers\SendMailController;
 
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/item/{id}', [ItemController::class, 'showDetailItem'])->name('item');
-Route::get('/item/{id}/contacts', [ContactController::class, 'showItemContact'])->name('item__contact');
+Route::get('/item/{id}/contacts', [ContactController::class, 'showContact'])->name('item__contact');
 
 Route::middleware('verified')->group(function () {
 //Route::middleware('auth')->group(function () {
   Route::get('/user', [IndexController::class, 'index']);
-  Route::get('/mypage', [MyPageController::class, 'showMypage']);
-  Route::get('/mylist', [ItemController::class, 'showLikedItem']);
+  Route::get('/mypage', [MyPageController::class, 'showMyPage']);
+  Route::get('/mylist', [MyListController::class, 'showMyList']);
+  Route::get('/recommend', [RecommendController::class, 'showRecommend']);
   Route::get('/mypage/profile', [ProfileController::class, 'showProfile']);
   Route::post('/mypage/profile/upload', [ProfileController::class, 'uploadProfileImage']);
   Route::PATCH('/mypage/profile/update', [ProfileController::class, 'updateProfile']);
   Route::get('/mypage/purchased', [MyPageController::class, 'showPurchasedItems']);
   Route::get('/mypage/selled', [MyPageController::class, 'showSelledItems']);
-  Route::get('/sell', [ItemController::class, 'showSell']);
-  Route::post('/sell/store', [ItemController::class, 'storeItem']);
+  Route::get('/mypage/following', [MyPageController::class, 'showFollowing']);
+  Route::get('/sell', [SellController::class, 'showSell']);
+  Route::post('/sell/store', [SellController::class, 'storeSell']);
   //子カテゴリー取得用ルート
   Route::get('/get-child-categories/{categoryId}', [ItemController::class, 'getChildCategories']);
   Route::post('/like/{itemId}', [LikeController::class, 'toggleLike']);
@@ -64,6 +70,10 @@ Route::middleware('verified')->group(function () {
   
   Route::get('/payment/{id}', [StripePaymentController::class, 'create']);
   Route::post('/payment/store', [StripePaymentController::class, 'store']);
+    //user follow機能
+    Route::post('/following/store',[FollowingController::class,'storeFollowing']);
+    Route::delete('/following/delete',[FollowingController::class,'destroyFollowing']);
+    
   //管理者
   Route::group(['middleware' => ['can:admin']], function () {
     Route::get('/management', [ManagementController::class, 'showManagement']);

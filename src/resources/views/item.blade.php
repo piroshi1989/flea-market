@@ -5,13 +5,18 @@
 @endsection
 
 @section('content')
+@if (session('message'))
+<div class="alert">
+    {{session('message')}}
+</div>
+@endif
 <div class= "item__content">
         <div class="item__image">
             <img src="{{asset($item['image_url'])}}">
         </div>
     <div class="item__detail">
         <p class="item__name">{{ $item['name'] }}</p>
-        <p class="item__brand">ブランド</p>
+        <p class="item__brand">{{ $item->brand->name }}</p>
         <p class="item__price_detail">¥{{ $item['price'] }}(値段)</p>
         <div class="counter__icons">
             <div class="likes__count">
@@ -33,15 +38,15 @@
                 <span class= "contact-count">{{ $contactCount }}</span>
             </div>
         </div>
-        
         <div class="form__content">
-            @if(!$soldOutInfo)
-            <a href={{ asset('/purchase/' . $item['id'])}} class="form__button-submit">購入する
-            </a>
-            @elseif($item->user['id'] === $userId)
-            <p>出品商品です</p>
-            @else
+            @if($soldOutInfo)
             <a class="form__button-submit">売却済です
+            </a>
+            @elseif($item->user_id === $userId)
+            <a class="form__button-submit">出品商品です
+            </a>
+            @else
+            <a href={{ asset('/purchase/' . $item['id'])}} class="form__button-submit">購入する
             </a>
             @endif
         </div>
@@ -76,23 +81,35 @@
                 </tr>
             </table>
         </div>
+        @can('user')
+        @if($userId !== $item->user_id && $followingUsers->isEmpty())
+        <div class="following__content">
+            <form class="form" method="post" action="/following/store">
+            @csrf
+                <input type="hidden" name="user_id" value="{{ $userId }}">
+                <input type="hidden" name="item_id" value="{{ $item->id }}">
+                <input type="hidden" name="following_user_id" value="{{ $item->user_id}}">
+                <div class="form__button">
+                <button class="form__button-submit" type="submit">出品者をフォローする</button>
+                </div>
+            </form>
+        </div>
+        @elseif($userId !== $item->user_id && $followingUsers->isNotEmpty())
+        <div class="following__content">
+            <form class="form" method="post" action="/following/delete">
+            @csrf
+            @method('DELETE')
+                <input type="hidden" name="id" value="{{ $item->user_id}}">
+                <div class="form__button">
+                <button class="form__button-submit" type="submit">出品者のフォローをやめる</button>
+                </div>
+            </form>
+        </div>
+        @endif
+        @endcan
     </div>
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  var form = document.querySelector(".form");
-  var keywordInput = document.querySelector(".keyword");
-
-  // キーワード入力欄でEnterキーが押されたときにフォームを送信
-  keywordInput.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-      event.preventDefault(); // デフォルトの送信動作をキャンセル
-      form.submit(); // フォームを送信
-    }
-  });
-});
-</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ asset('js/ajaxlike.js') }}"></script>
 @endsection

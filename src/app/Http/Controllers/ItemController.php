@@ -8,15 +8,23 @@ use App\Models\Contact;
 use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\Condition;
+use App\Models\Brand;
 use App\Models\Sale;
+use App\Models\Following;
 use Illuminate\Http\Request;
-use App\Http\Requests\ItemRequest;
+
 use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
     public function showDetailItem($id){
         $item = Item::findOrFail($id);
+         // 閲覧履歴をセッションに保存
+        $viewedItemCategories = session('viewed_item_categories', []);
+        array_unshift($viewedItemCategories, $item->category_id);
+
+        session(['viewed_item_categories' => array_slice($viewedItemCategories, 0, 3)]); // 例: 直近3アイテムのみ保存
+
         $likeData = Like::where('user_id', $item->user_id)->where('item_id', $item->id)->first();
 
         // お気に入りのカウントを取得
@@ -24,62 +32,15 @@ class ItemController extends Controller
 
         // 問い合わせのカウントを取得
         $contactCount = Contact::where('item_id', $item->id)->count();
-    
+
+        //売却済かを取得
         $soldOutInfo = Sale::where('item_id', $item->id)->first();
 
         $userId = Auth::id();
+        $followingUsers = Following::where('user_id', $userId)->where('following_user_id', $item->user_id)->get();
 
-        return view('item', compact('item', 'likeData', 'likeCount', 'contactCount', 'soldOutInfo','userId'));
+        return view('item', compact('item', 'likeData', 'likeCount', 'contactCount', 'soldOutInfo','userId','followingUsers'));
     }
-
-    public function showSellItem(){
-        return view();
-    }
-
-    public function showLikedItem()
-    {
-        $user_id = Auth::id();
-
-        $likedItemIds = Like::where('user_id', $user_id)->pluck('item_id')->toArray();
-
-        $likedItems = Item::whereIn('id', $likedItemIds)->get();
-
-        return view('mylist', compact('likedItems'));
-    }
-
-    public function showSell()
-    {
-        $categories = Category::all();
-        $conditions = Condition::all();
-        $child_categories = ChildCategory::all();
-        return view('sell', compact('categories','child_categories', 'conditions'));
-    }
-
-    public function storeItem(ItemRequest $request)
-    {
-        $store = new Item;
-        $store->user_id = Auth::id();
-        $store->category_id = $request->category_id;
-        $store->child_category_id = $request->child_category_id;
-        $store->condition_id = $request->condition_id;
-        $store->name = $request->name;
-        $store->detail = $request->detail;
-        $store->price = $request->price;
-
-        $dir = 'images';
-        $uploadedFile = $request->file('image');
-        if ($uploadedFile) {
-            $file_name = $uploadedFile->getClientOriginalName();
-
-            $uploadedFile->storeAs('public/' . $dir, $file_name);
-
-            $store->image_url = 'storage/' . $dir . '/' . $file_name;
-        }
-
-        $store->save();
-
-        return redirect('/sell')->with('message', '商品を出品しました');
-        }
 
     public function getChildCategories($categoryId)
     {

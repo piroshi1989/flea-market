@@ -11,7 +11,7 @@ use App\Http\Requests\ContactRequest;
 
 class ContactController extends Controller
 {
-    public function showItemContact($id)
+    public function showContact($id)
     {
         $item = Item::findOrFail($id);
         $likeData = Like::where('user_id', $item->user_id)->where('item_id', $item->id)->first();

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Requests\AdminRequest;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,6 +18,7 @@ class AdminController extends Controller
         $store->postcode = $request->postcode;
         $store->address = $request->address;
         $store->building_name = $request->building_name;
+
         $store->save();
 
         return redirect('/management')->with('message', '管理者を作成しました');
