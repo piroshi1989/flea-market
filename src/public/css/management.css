@@ -59,3 +59,7 @@
     display: block;
     margin:0 auto;
 }
+
+.graph__content{
+    margin:30px;
+}

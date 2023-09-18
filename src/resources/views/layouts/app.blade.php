@@ -52,7 +52,7 @@
 <div class="search__form">
     <form method="post" action="/search" id="searchForm">
         @csrf
-        <div class="form__content">
+        <div class="search-form__content">
             <input type="hidden" name="form__type" value="search__form">
             <select name="category" class="category">
                 <option value="">カテゴリー</option>

@@ -222,5 +222,44 @@
         </div>
     </form>
 </div>
+<hr>
+<div class="graph__content">
+    <h2 class="form__heading">購入された時間</h2>
+    <canvas id="timeChart" width="400" height="200"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script>
+        var timeCounts = @json($timeCounts);
+        var labels = Array.from({ length: 24 }, (_, i) => i);
+        var data = Array(24).fill(0);
+
+        // データがある場所に値を設定
+        Object.keys(timeCounts).forEach(key => {
+            var index = parseInt(key);
+            data[index] = timeCounts[key];
+        });
+
+        var ctx = document.getElementById('timeChart').getContext('2d');
+        var timeChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels.map(label => label + '時'),
+                datasets: [{
+                    label: '時間ごとの件数',
+                    data: data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</div>
 <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
 @endsection
