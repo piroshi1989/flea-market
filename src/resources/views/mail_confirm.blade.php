@@ -12,17 +12,17 @@
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">件名</p>
-                <input type="text" name="subject" value="{{ $emails['subject'] }}" readonly>
+                <input type="text" name="subject" value="{{ $emails->subject }}" readonly>
             </div>
         </div>
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">本文</p>
-                <textarea class="mail__body" name="body" readonly>{{ $emails['body'] }}</textarea>
+                <textarea class="mail__body" name="body" readonly>{{ $emails->body }}</textarea>
             </div>
         </div>
         <div class="form__button">
-        <button class="form__button-submit" type="submit" name="action" value="back">入力内容修正</button>
+            <button class="form__button-submit" type="submit" name="action" value="back">入力内容修正</button>
         </div>
         <div class="form__button">
             <button class="form__button-submit" type="submit" name="action" value="submit">送信</button>

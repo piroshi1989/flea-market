@@ -16,6 +16,7 @@ class AddressController extends Controller
         $item = Item::findOrFail($id);
         $user = User::findOrFail(Auth::id());
 
+        //検索用
         $categories = Category::all();
         $brands = Brand::all();
 
@@ -36,7 +37,6 @@ class AddressController extends Controller
 
         //配送先の変更はsessionで取得
         session(['previous_shipping_info' => $shippingInfo]);
-        //配送先の変更はsessionで取得
 
         return redirect('/purchase/' . $request->item_id)->with('message', '配送先を変更しました');
     }

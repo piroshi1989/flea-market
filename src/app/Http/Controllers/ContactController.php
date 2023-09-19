@@ -25,6 +25,7 @@ class ContactController extends Controller
 
         $contacts = Contact::where('item_id', $item->id)->get();
 
+        //検索用
         $categories = Category::all();
         $brands = Brand::all();
 

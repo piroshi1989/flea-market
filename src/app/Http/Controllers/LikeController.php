@@ -29,7 +29,6 @@ class LikeController extends Controller
 
             $isLiked = false; // お気に入り登録が解除された場合はfalseを設定
         }
-
         // お気に入り登録の状態をビューに返す
         return response()->json(['liked' => $isLiked]);
     }

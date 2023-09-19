@@ -11,19 +11,19 @@
 </div>
 @endif
 <div class= "item__content">
-        <div class="item__image">
-            <img src="{{asset($item['image_url'])}}">
-        </div>
+    <div class="item__image">
+        <img src="{{ asset($item->image_url) }}">
+    </div>
     <div class="item__detail">
-        <p class="item__name">{{ $item['name'] }}</p>
+        <p class="item__name">{{ $item->name }}</p>
         <p class="item__brand">{{ $item->brand->name }}</p>
-        <p class="item__price_detail">¥{{ $item['price'] }}(値段)</p>
+        <p class="item__price_detail">¥{{ $item->price }}(値段)</p>
         <div class="counter__icons">
             <div class="likes__count">
                 @auth
                 <i class="bi bi-star like-toggle"
                 data-like-id="{{ $likeData}}"
-                data-item-id="{{ $item['id'] }}"
+                data-item-id="{{ $item->id }}"
                 data-user-id="{{ Auth::id() }}"></i>
                 @endauth
                 @guest
@@ -32,7 +32,7 @@
                 <span class= "like-count" id="like-count">{{ $likeCount }}</span>
             </div>
             <div class="contacts__count">
-                <a class="icon-link" href={{ asset('/item/' . $item['id']) . '/contacts' }}>
+                <a class="icon-link" href={{ asset('/item/' . $item->id) . '/contacts' }}>
                 <i class="bi bi-chat"></i>
                 </a>
                 <span class= "contact-count">{{ $contactCount }}</span>
@@ -46,19 +46,18 @@
             <a class="form__button-submit">出品商品です
             </a>
             @else
-            <a href={{ asset('/purchase/' . $item['id'])}} class="form__button-submit">購入する
+            <a href={{ asset('/purchase/' . $item->id)}} class="form__button-submit">購入する
             </a>
             @endif
         </div>
         <h3 class="item__description">商品説明</h3>
-        <p class="description__detail">{{ $item['detail'] }}
-        </p>
+        <p class="description__detail">{{ $item->detail }}</p>
         <h3 class="item__information">商品の情報</h3>
         <div class="item__information-table">
             <table class="item__information-table__inner">
                 <tr class="item__information-table__row">
                     <th class="item__information-table__header">
-                    <span class="item__information-table__header-span">カテゴリー</span>
+                        <span class="item__information-table__header-span">カテゴリー</span>
                     </th>
                     <td class="item__information-table__item__category">
                         <div class="item__category">
@@ -73,7 +72,7 @@
                 </tr>
                 <tr class="item__information-table__row">
                     <th class="item__information-table__header">
-                    <span class="item__information-table__header-span">商品の状態</span>
+                        <span class="item__information-table__header-span">商品の状態</span>
                     </th>
                     <td class="item__information-table__item">
                         {{ $item->condition->name }}
@@ -82,7 +81,7 @@
             </table>
         </div>
         @can('user')
-        @if($userId !== $item->user_id && $followingUsers->isEmpty())
+        @if($userId !== $item->user_id && empty($followingUsers))
         <div class="following__content">
             <form class="form" method="post" action="/following/store">
             @csrf
@@ -90,18 +89,18 @@
                 <input type="hidden" name="item_id" value="{{ $item->id }}">
                 <input type="hidden" name="following_user_id" value="{{ $item->user_id}}">
                 <div class="form__button">
-                <button class="form__button-submit" type="submit">出品者をフォローする</button>
+                    <button class="form__button-submit" type="submit">出品者をフォローする</button>
                 </div>
             </form>
         </div>
-        @elseif($userId !== $item->user_id && $followingUsers->isNotEmpty())
+        @elseif($userId !== $item->user_id && !empty($followingUsers))
         <div class="following__content">
             <form class="form" method="post" action="/following/delete">
             @csrf
             @method('DELETE')
                 <input type="hidden" name="id" value="{{ $item->user_id}}">
                 <div class="form__button">
-                <button class="form__button-submit" type="submit">出品者のフォローをやめる</button>
+                    <button class="form__button-submit" type="submit">出品者のフォローをやめる</button>
                 </div>
             </form>
         </div>

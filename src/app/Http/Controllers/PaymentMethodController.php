@@ -10,23 +10,23 @@ use App\Models\Brand;
 
 class PaymentMethodController extends Controller
 {
-    public function showPaymentMethod($id, Request $request){
-
+    public function showPaymentMethod($id, Request $request)
+    {
         $item = Item::findOrFail($id);
-
         $paymentMethods = PaymentMethod::all();
 
+        //検索用
         $categories = Category::all();
         $brands = Brand::all();
 
         $selectedCategory = $request->input('category');
         $selectedBrand = $request->input('brand');
 
-        return view('paymentMethod',compact('paymentMethods','item', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
+        return view('payment__method',compact('paymentMethods','item', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
     }
 
-    public function selectPaymentMethod(Request $request){
-
+    public function selectPaymentMethod(Request $request)
+    {
         $item = Item::findOrFail($request->item_id);
 
         $paymentMethod = PaymentMethod::findOrFail($request->payment_method_id);

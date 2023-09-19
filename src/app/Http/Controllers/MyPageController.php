@@ -14,8 +14,8 @@ use App\Models\Following;
 
 class MyPageController extends Controller
 {
-
-    public function showMyPage(Request $request){
+    public function showMyPage(Request $request)
+    {
         $userId = Auth::id();
         $user = Auth::user();
 
@@ -32,13 +32,12 @@ class MyPageController extends Controller
         return view('mypage', compact('user', 'purchasedItems', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
     }
 
-    public function showPurchasedItems(Request $request){
+    public function showPurchasedItems(Request $request)
+    {
         $userId = Auth::id();
         $user = Auth::user();
 
-        $purchasedItemIds = Sale::where('user_id', $user->id)->pluck('item_id');
-
-        $purchasedItems = Item::whereIn('id', $purchasedItemIds)->get();
+        $purchasedItems = Sale::where('user_id', $userId)->get();
 
         $categories = Category::all();
         $brands = Brand::all();
@@ -46,14 +45,15 @@ class MyPageController extends Controller
         $selectedCategory = $request->input('category');
         $selectedBrand = $request->input('brand');
 
-        return view('mypage_purchased', compact('user', 'purchasedItems', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
+        return view('mypage__purchased', compact('user', 'purchasedItems', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
     }
 
-    public function showSelledItems(Request $request){
+    public function showExhibitedItems(Request $request)
+    {
         $userId = Auth::id();
         $user = Auth::user();
 
-        $selledItems = Item::where('user_id', $user->id)->get();
+        $exhibitedItems = Item::where('user_id', $user->id)->get();
 
         $categories = Category::all();
         $brands = Brand::all();
@@ -61,10 +61,11 @@ class MyPageController extends Controller
         $selectedCategory = $request->input('category');
         $selectedBrand = $request->input('brand');
 
-        return view('mypage_selled', compact('user', 'selledItems','categories',  'brands', 'selectedCategory', 'selectedBrand'));
+        return view('mypage__exhibited', compact('user', 'exhibitedItems','categories',  'brands', 'selectedCategory', 'selectedBrand'));
     }
 
-    public function showFollowing(Request $request){
+    public function showFollowing(Request $request)
+    {
         $userId = Auth::id();
         $user = Auth::user();
         $followingUserIds = Following::where('user_id', $userId)->pluck('following_user_id');
@@ -78,6 +79,6 @@ class MyPageController extends Controller
         $selectedCategory = $request->input('category');
         $selectedBrand = $request->input('brand');
 
-        return view('mypage_following', compact('user', 'followingUsers', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
+        return view('mypage__following', compact('user', 'followingUsers', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
     }
 }

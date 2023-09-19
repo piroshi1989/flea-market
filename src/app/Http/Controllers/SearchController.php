@@ -15,7 +15,7 @@ class SearchController extends Controller
         $categoryId = $request->input('category');
         $brandId = $request->input('brand');
 
-        $searchedItems = Item::with('category', 'brand')->ItemsSearch($categoryId, $brandId, $keyword)->get();
+        $searchedItems = Item::ItemsSearch($categoryId, $brandId, $keyword)->get();
 
         // 売却済ならSoldOutを表示される
         $searchedItems = $searchedItems->map(function ($searchedItem) {

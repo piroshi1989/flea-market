@@ -15,7 +15,12 @@
 <body>
     <header class="header">
         <div class="header__inner">
+            @guest
             <a class="header__logo" href="/">
+            @endguest
+            @auth
+            <a class="header__logo" href="/user">
+            @endauth
                 <svg xmlns="http://www.w3.org/2000/svg" width="63" height="36" viewBox="0 0 63 36" fill="none">
                 <path d="M56.69 0H22.26C12.33 0 2.55001 8.06 0.420005 18C-1.71999 27.94 4.60001 36 14.52 36H25.41C26.88 36 28.33 34.81 28.65 33.33L30.17 26.27C30.49 24.8 29.55 23.6 28.08 23.6H15.97C13.21 23.6 11.26 21.47 11.77 18.71C12.3 15.85 15.09 13.51 17.93 13.51H36.97C38.44 13.51 39.38 14.7 39.06 16.18L35.37 33.34C35.05 34.81 35.99 36.01 37.46 36.01H46.29C47.76 36.01 49.21 34.82 49.53 33.34L53.22 16.18C53.54 14.71 54.99 13.51 56.46 13.51C57.93 13.51 59.38 12.32 59.7 10.84L62.03 0H56.7L56.69 0Z" fill="white"/>
                 </svg>
@@ -49,85 +54,85 @@
             </a>
         </div>
         <div class="header__item">
-<div class="search__form">
-    <form method="post" action="/search" id="searchForm">
-        @csrf
-        <div class="search-form__content">
-            <input type="hidden" name="form__type" value="search__form">
-            <select name="category" class="category">
-                <option value="">カテゴリー</option>
-                @foreach($categories as $category)
-                <option class="categories__option" value="{{ $category->id}}" {{ $selectedCategory == $category->id ? 'selected' : '' }}>
-                {{ $category->name }}
-                </option>
-                @endforeach
-            </select>
-            <select name="brand" class="brand">
-                <option value="">ブランド</option>
-                @foreach($brands as $brand)
-                <option class="brands__option" value="{{ $brand->id}}" {{ $selectedBrand == $brand->id ? 'selected' : '' }}>
-                    {{ $brand->name }}
-                </option>
-                @endforeach
-            </select>
-            <input type="text" class="keyword" name="keyword" placeholder="なにをお探しですか?" onkeydown="return handleEnterKey(event)">
-            <input type="submit" class="submit-button">
-        </div>
-    </form>
-</div>
-<nav>
-    <ul class="header-nav">
-        @if (Auth::guest())
-        <li class="header-nav__item">
-            <a class="header-nav__link" href="/login">ログイン</a>
-        </li>
-        <li class="header-nav__item">
-            <a class="header-nav__link" href="/register">会員登録</a>
-        </li>
-        @endif
-        @if (Auth::check())
-        <li class="header-nav__item">
-            <form action="{{ route('logout') }}" method="post">
-            @csrf
-            <button class="header-nav__button" type="submit">ログアウト</button>
-            </form>
-        </li>
-        @endif
-        @can('user')
-        <li class="header-nav__item">
-            <a class="header-nav__link" href="/mypage">マイページ</a>
-        </li>
-        <li class="header-nav__item">
-            <a class="header-nav__link sell" href="/sell">出品</a>
-        </li>
-        @endcan
-        @can('admin')
-        <li class="header-nav__item">
-            <a class="header-nav__link sell" href="/management">管理画面</a>
-        </li>
-        @endcan
-    </ul>
-</nav>
+            <div class="search__form">
+                <form method="post" action="/search" id="searchForm">
+                    @csrf
+                    <div class="search-form__content">
+                        <input type="hidden" name="form__type" value="search__form">
+                        <select name="category" class="category">
+                            <option value="">カテゴリー</option>
+                            @foreach($categories as $category)
+                            <option class="categories__option" value="{{ $category['id']}}" {{ $selectedCategory == $category['id'] ? 'selected' : '' }}>
+                            {{ $category['name'] }}
+                            </option>
+                            @endforeach
+                        </select>
+                        <select name="brand" class="brand">
+                            <option value="">ブランド</option>
+                            @foreach($brands as $brand)
+                            <option class="brands__option" value="{{ $brand['id']}}" {{ $selectedBrand == $brand['id'] ? 'selected' : '' }}>
+                            {{ $brand['name'] }}
+                            </option>
+                            @endforeach
+                        </select>
+                        <input type="text" class="keyword" name="keyword" placeholder="なにをお探しですか?" onkeydown="return handleEnterKey(event)">
+                        <input type="submit" class="submit-button">
+                    </div>
+                </form>
+            </div>
+            <nav>
+                <ul class="header-nav">
+                    @guest
+                    <li class="header-nav__item">
+                        <a class="header-nav__link" href="/login">ログイン</a>
+                    </li>
+                    <li class="header-nav__item">
+                        <a class="header-nav__link" href="/register">会員登録</a>
+                    </li>
+                    @endguest
+                    @auth
+                    <li class="header-nav__item">
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button class="header-nav__button" type="submit">ログアウト</button>
+                        </form>
+                    </li>
+                    @endauth
+                    @can('user')
+                    <li class="header-nav__item">
+                        <a class="header-nav__link" href="/mypage">マイページ</a>
+                    </li>
+                    <li class="header-nav__item">
+                        <a class="header-nav__link sell" href="/sell">出品</a>
+                    </li>
+                    @endcan
+                    @can('admin')
+                    <li class="header-nav__item">
+                        <a class="header-nav__link sell" href="/management">管理画面</a>
+                    </li>
+                    @endcan
+                </ul>
+            </nav>
         </div>
     </header>
 
     <main>
     @yield('content')
     </main>
-<script>
-function handleEnterKey(event) {
-    // イベントからキーコードを取得
-    var keyCode = event.keyCode || event.which;
+    <script>
+    function handleEnterKey(event) {
+        // イベントからキーコードを取得
+        var keyCode = event.keyCode || event.which;
 
-    // Enterキーのキーコードは 13
-    if (keyCode === 13) {
-        // フォームを送信
-        document.getElementById('searchForm').submit();
-        return false; // デフォルトの動作をキャンセル
+        // Enterキーのキーコードは 13
+        if (keyCode === 13) {
+            // フォームを送信
+            document.getElementById('searchForm').submit();
+            return false; // デフォルトの動作をキャンセル
+        }
+
+        return true; // 他のキーはそのまま処理
     }
-
-    return true; // 他のキーはそのまま処理
-}
-</script>
+    </script>
 </body>
 </html>
