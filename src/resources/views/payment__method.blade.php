@@ -15,14 +15,14 @@
                 <select name="payment_method_id" class="payment_method_id">
                     <option>選択してください</option>
                     @foreach($paymentMethods as $paymentMethod)
-                    <option class="paymentMethods__option" value="{{ $paymentMethod->id}}">
-                        {{ $paymentMethod->name }}
+                    <option class="paymentMethods__option" value="{{ $paymentMethod['id']}}">
+                        {{ $paymentMethod['name'] }}
                     </option>
                     @endforeach
                 </select>
             </div>
         <div class="form__button">
-        <button class="form__button-submit" type="submit">変更する</button>
+            <button class="form__button-submit" type="submit">変更する</button>
         </div>
     </form>
 </div>

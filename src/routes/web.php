@@ -46,7 +46,7 @@ Route::middleware('verified')->group(function () {
   Route::post('/mypage/profile/upload', [ProfileController::class, 'uploadProfileImage']);
   Route::PATCH('/mypage/profile/update', [ProfileController::class, 'updateProfile']);
   Route::get('/mypage/purchased', [MyPageController::class, 'showPurchasedItems']);
-  Route::get('/mypage/selled', [MyPageController::class, 'showSelledItems']);
+  Route::get('/mypage/exhibited', [MyPageController::class, 'showExhibitedItems']);
   Route::get('/mypage/following', [MyPageController::class, 'showFollowing']);
   Route::get('/sell', [SellController::class, 'showSell']);
   Route::post('/sell/store', [SellController::class, 'storeSell']);

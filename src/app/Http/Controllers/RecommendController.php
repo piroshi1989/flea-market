@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Like;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Item;
 use App\Models\Sale;
-use Illuminate\Support\Facades\Auth;
 
 class RecommendController extends Controller
 {
     public function showRecommend(Request $request)
     {
+        //sessionに保存された、閲覧した商品のカテゴリー直近3つ
         $viewedCategories = session('viewed_item_categories', []);
 
         $recommendedItems = Item::whereIn('category_id', $viewedCategories)->get();
@@ -26,6 +25,7 @@ class RecommendController extends Controller
             return $recommendedItem;
         });
 
+        //検索用
         $categories = Category::all();
         $brands = Brand::all();
 

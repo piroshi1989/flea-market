@@ -16,8 +16,8 @@ class MyListController extends Controller
     {
         $userId = Auth::id();
 
-        $likedItemIds = Like::where('user_id', $userId)->pluck('item_id')->toArray();
-        $likedItems = Item::whereIn('id', $likedItemIds)->get();
+        //ユーザーがいいねしたitemを取得
+        $likedItems = Like::where('user_id', $userId)->get();
 
         $followingUserIds = Following::where('user_id', $userId)->pluck('following_user_id')->toArray();
 

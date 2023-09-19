@@ -23,7 +23,7 @@
         <input type="file" name="image" id="fileInput" style="display: none;">
         <div class="form__group">
             <h3 class="form__title">商品の詳細</h3>
-            <div class="line"></div>
+            <hr class="centered-hr">
             <div class="form__group-content">
                 <p class="input__title">カテゴリー</p>
                 <select name="category_id" class="category_id">
@@ -47,9 +47,9 @@
                 </select>
             </div>
             <div class="form__error">
-            @error('category_id')
-            {{ $message }}
-            @enderror
+                @error('category_id')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -65,9 +65,9 @@
                 </select>
             </div>
             <div class="form__error">
-            @error('brand')
-            {{ $message }}
-            @enderror
+                @error('brand')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -83,22 +83,22 @@
                 </select>
             </div>
             <div class="form__error">
-            @error('condition_id')
-            {{ $message }}
-            @enderror
+                @error('condition_id')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <h3 class="form__title">商品名と説明</h3>
-        <div class="line"></div>
+        <hr class="centered-hr">
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">商品名</p>
                 <input type="text" name="name" value="{{ old('name') }}">
             </div>
             <div class="form__error">
-            @error('name')
-            {{ $message }}
-            @enderror
+                @error('name')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -107,26 +107,26 @@
                 <textarea name="detail" value="{{ old('detail') }}"></textarea>
             </div>
             <div class="form__error">
-            @error('detail')
-            {{ $message }}
-            @enderror
+                @error('detail')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <h3 class="form__title">販売価格</h3>
-        <div class="line"></div>
+        <hr class="centered-hr">
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">販売価格</p>
                 <input type="text" name="price" placeholder="¥" value="{{ old('price') }}">
             </div>
             <div class="form__error">
-            @error('price')
-            {{ $message }}
-            @enderror
+                @error('price')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__button">
-        <button class="form__button-submit" type="submit">出品する</button>
+            <button class="form__button-submit" type="submit">出品する</button>
         </div>
     </form>
 </div>

@@ -15,13 +15,17 @@
     <h2 class="form__heading">プロフィール設定</h2>
     <div class="profile__content">
         <div class="profile__image">
-            <img src="{{asset($user['image_url'])}}">
+            @empty($user->image_url)
+            <i class="bi bi-person-circle"></i>
+            @else
+            <img src="{{asset($user->image_url)}}">
+            @endempty
         </div>
         <form  class="upload__form" method="POST" action="profile/upload" enctype="multipart/form-data" id="uploadForm">
-        @csrf
-        <label for="fileInput" class="upload__image-button">
-        </label>
-        <input type="file" name="image" id="fileInput" style="display: none;">
+            @csrf
+            <label for="fileInput" class="upload__image-button">
+            </label>
+            <input type="file" name="image" id="fileInput" style="display: none;">
         </form>
     </div>
 
@@ -36,18 +40,18 @@
                 <input type="text" name="name" value="{{ old('name', $user->name) }}">
             </div>
             <div class="form__error">
-            @error('name')
-            {{ $message }}
-            @enderror
+                @error('name')
+                {{ $message }}
+                @enderror
             </div>
             <div class="form__group-content">
                 <p class="input__title">郵便番号</p>
                 <input type="text" class="p-postal-code" name="postcode" value="{{ old('postcode', $user->postcode) }}">
             </div>
             <div class="form__error">
-            @error('postcode')
-            {{ $message }}
-            @enderror
+                @error('postcode')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -56,9 +60,9 @@
                 <input type="text" class="p-region p-locality p-street-address p-extended-address" name="address" value="{{ old('address', $user->address) }}">
             </div>
             <div class="form__error">
-            @error('address')
-            {{ $message }}
-            @enderror
+                @error('address')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -67,13 +71,13 @@
                 <input type="text" name="building_name" value="{{ old('building_name', $user->building_name) }}">
             </div>
             <div class="form__error">
-            @error('building_name')
-            {{ $message }}
-            @enderror
+                @error('building_name')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__button">
-        <button class="form__button-submit" type="submit">更新する</button>
+            <button class="form__button-submit" type="submit">更新する</button>
         </div>
     </form>
 </div>

@@ -17,13 +17,15 @@ use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
-    public function showDetailItem($id, Request $request){
+    public function showDetailItem($id, Request $request)
+    {
         $item = Item::findOrFail($id);
          // 閲覧履歴をセッションに保存
         $viewedItemCategories = session('viewed_item_categories', []);
         array_unshift($viewedItemCategories, $item->category_id);
 
-        session(['viewed_item_categories' => array_slice($viewedItemCategories, 0, 3)]); // 例: 直近3アイテムのみ保存
+        //直近3アイテムのみ保存
+        session(['viewed_item_categories' => array_slice($viewedItemCategories, 0, 3)]);
 
         $likeData = Like::where('user_id', $item->user_id)->where('item_id', $item->id)->first();
 
@@ -36,9 +38,11 @@ class ItemController extends Controller
         //売却済かを取得
         $soldOutInfo = Sale::where('item_id', $item->id)->first();
 
+        //ユーザーが商品の出品者をフォローしているか取得
         $userId = Auth::id();
-        $followingUsers = Following::where('user_id', $userId)->where('following_user_id', $item->user_id)->get();
+        $followingUsers = Following::where('user_id', $userId)->where('following_user_id', $item->user_id)->first();
 
+        //検索用
         $categories = Category::all();
         $brands = Brand::all();
 

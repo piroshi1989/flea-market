@@ -23,9 +23,9 @@
                 <input type="text" name="name" value="{{ old('name') }}">
             </div>
             <div class="form__error">
-            @error('name')
-            {{ $message }}
-            @enderror
+                @error('name')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -34,9 +34,9 @@
                 <input type="email" name="email" value="{{ old('email') }}">
             </div>
             <div class="form__error">
-            @error('name')
-            {{ $message }}
-            @enderror
+                @error('name')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -45,9 +45,9 @@
                 <input type="password" name="password">
             </div>
             <div class="form__error">
-            @error('password')
-            {{ $message }}
-            @enderror
+                @error('password')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -56,9 +56,9 @@
                 <input type="text" class="p-postal-code" name="postcode" value="{{ old('postcode') }}">
             </div>
             <div class="form__error">
-            @error('postcode')
-            {{ $message }}
-            @enderror
+                @error('postcode')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -67,9 +67,9 @@
                 <input type="text" class="p-region p-locality p-street-address p-extended-address" name="address" value="{{ old('address') }}">
             </div>
             <div class="form__error">
-            @error('address')
-            {{ $message }}
-            @enderror
+                @error('address')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -78,17 +78,17 @@
                 <input type="text" name="building_name" value="{{ old('building_name') }}">
             </div>
             <div class="form__error">
-            @error('building_name')
-            {{ $message }}
-            @enderror
+                @error('building_name')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__button">
-        <button class="form__button-submit" type="submit">管理者を作成する</button>
+            <button class="form__button-submit" type="submit">管理者を作成する</button>
         </div>
     </form>
 </div>
-<hr>
+<hr class="centered-hr">
 <div class= "item-list">
     <h2 class="form__heading">商品一覧</h2>
     <div class="item-table">
@@ -101,7 +101,7 @@
                     <span class="item-table__header-span">商品名</span>
                 </th>
                 <th class="item-table__header">
-                <span class="item-table__header-span">商品代金</span>
+                    <span class="item-table__header-span">商品代金</span>
                 </th>
                 <th class="item-table__header">
                     <span class="item-table__header-span">出品者</span>
@@ -139,7 +139,7 @@
     {{ $items->links() }}
     </div>
 </div>
-<hr>
+<hr class="centered-hr">
 <div class = "payment__confirm">
     <h2 class="form__heading">送金額確認</h2>
     <div class="item-table">
@@ -152,7 +152,7 @@
                     <span class="item-table__header-span">商品名</span>
                 </th>
                 <th class="item-table__header">
-                <span class="item-table__header-span">送金額</span>
+                    <span class="item-table__header-span">送金額</span>
                 </th>
                 <th class="item-table__header">
                     <span class="item-table__header-span">出品者</span>
@@ -190,7 +190,7 @@
     {{ $sales->links() }}
     </div>
 </div>
-<hr>
+<hr class="centered-hr">
 <div class="form__content">
     <h2 class="form__heading">メール作成</h2>
     <form class="form" method="POST" action="mail/confirm">
@@ -201,9 +201,9 @@
                 <input type="text" name="subject" value="{{ old('subject') }}">
             </div>
             <div class="form__error">
-            @error('subject')
-            {{ $message }}
-            @enderror
+                @error('subject')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -212,9 +212,9 @@
                 <textarea name="body">{{ old('body') }}</textarea>
             </div>
             <div class="form__error">
-            @error('body')
-            {{ $message }}
-            @enderror
+                @error('body')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__button">
@@ -222,7 +222,7 @@
         </div>
     </form>
 </div>
-<hr>
+<hr class="centered-hr">
 <div class="graph__content">
     <h2 class="form__heading">購入された時間</h2>
     <canvas id="timeChart" width="400" height="200"></canvas>

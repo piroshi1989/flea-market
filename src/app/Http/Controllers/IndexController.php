@@ -58,6 +58,7 @@ class IndexController extends Controller
             return $item;
         });
 
+        //検索用
         $categories = Category::all();
         $brands = Brand::all();
 

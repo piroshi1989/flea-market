@@ -15,10 +15,10 @@ class ManagementController extends Controller
     {
         $items = Item::paginate(10, ['*'], 'itemPage')->appends(['salePage' => \Request::get('salePage')]);
 
-        // コレクションをマップして新しいフィールドを追加
+        //商品一覧の表作成用。saleモデルから取得し、売却済なら○を未なら×を返す
         $items->map(function ($item) {
             $sale = Sale::where('item_id', $item['id'])->first();
-            if(!empty($sale)){
+            if($sale){
                 $result = '○';
             }else{
                 $result = '×';
@@ -28,6 +28,7 @@ class ManagementController extends Controller
                 return $item;
         });
 
+        //payment_amountを送金額とし、一覧表示する
         $sales = Sale::paginate(10, ['*'], 'salePage')->appends(['itemPage' => \Request::get('itemPage')]);
 
         //graph作成用
@@ -41,12 +42,13 @@ class ManagementController extends Controller
         });
         $timeCounts = $formattedSalesTimes->groupBy('formatted_created_at')->map->count();
 
+        //検索用
         $categories = Category::all();
         $brands = Brand::all();
 
         $selectedCategory = $request->input('category');
         $selectedBrand = $request->input('brand');
 
-    return view('management', compact('items', 'sales', 'timeCounts', 'categories', 'brands','selectedCategory', 'selectedBrand'));
+        return view('management', compact('items', 'sales', 'timeCounts', 'categories', 'brands','selectedCategory', 'selectedBrand'));
     }
 }

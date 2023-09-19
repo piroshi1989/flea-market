@@ -9,8 +9,8 @@
     <h2 class="form__heading">住所の変更</h2>
     <form class="form h-adr" action="/address/change" method="post">
         @csrf
-        <input type="hidden" name="name" value="{{ $user['name'] }}">
-        <input type="hidden" name="item_id" value="{{ $item['id'] }}">
+        <input type="hidden" name="name" value="{{ $user->name }}">
+        <input type="hidden" name="item_id" value="{{ $item->id }}">
         <span class="p-country-name" style="display:none;">Japan</span>
         <div class="form__group">
             <div class="form__group-content">
@@ -18,9 +18,9 @@
                 <input type="text" class="p-postal-code" name="postcode" value="{{ old('postcode') }}">
             </div>
             <div class="form__error">
-            @error('postcode')
-            {{ $message }}
-            @enderror
+                @error('postcode')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -29,9 +29,9 @@
                 <input type="text" class="p-region p-locality p-street-address p-extended-address" name="address" value="{{ old('address') }}">
             </div>
             <div class="form__error">
-            @error('address')
-            {{ $message }}
-            @enderror
+                @error('address')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__group">
@@ -40,13 +40,13 @@
                 <input type="text" name="building_name" value="{{ old('building_name') }}">
             </div>
             <div class="form__error">
-            @error('building_name')
-            {{ $message }}
-            @enderror
+                @error('building_name')
+                {{ $message }}
+                @enderror
             </div>
         </div>
         <div class="form__button">
-        <button class="form__button-submit" type="submit">更新する</button>
+            <button class="form__button-submit" type="submit">更新する</button>
         </div>
     </form>
 </div>

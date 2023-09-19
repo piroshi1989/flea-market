@@ -61,9 +61,9 @@
                         <input type="email" name="email" class="email" value="{{ old('email') }}">
                     </div>
                     <div class="form__error">
-                    @error('email')
-                    {{ $message }}
-                    @enderror
+                        @error('email')
+                        {{ $message }}
+                        @enderror
                     </div>
                 </div>
                 <div class="form__group">
@@ -72,13 +72,13 @@
                         <input type="password" name="password">
                     </div>
                     <div class="form__error">
-                    @error('password')
-                    {{ $message }}
-                    @enderror
+                        @error('password')
+                        {{ $message }}
+                        @enderror
                     </div>
                 </div>
                 <div class="form__button">
-                <button class="form__button-submit" type="submit">ログインする</button>
+                    <button class="form__button-submit" type="submit">ログインする</button>
                 </div>
             </form>
             <div class="form__link">
