@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\SendMailRequest;
 use App\Mail\SendNoticeMail;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\Brand;
 
 class SendMailController extends Controller
 {
@@ -14,7 +16,14 @@ class SendMailController extends Controller
     public function confirmNoticeMail(SendMailRequest $request)
     {
         $emails = $request->all();
-        return view('mail_confirm', compact('emails'));
+
+        $categories = Category::all();
+        $brands = Brand::all();
+
+        $selectedCategory = $request->input('category');
+        $selectedBrand = $request->input('brand');
+
+        return view('mail_confirm', compact('emails', 'categories', 'brands','selectedCategory', 'selectedBrand'));
     }
 
     public function sendNoticeMail(SendMailRequest $request){

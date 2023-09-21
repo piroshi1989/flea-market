@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\ProfileImageRequest;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -26,7 +27,7 @@ class ProfileController extends Controller
         return view('profile', compact('user', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
     }
 
-    public function uploadProfileImage(Request $request)
+    public function uploadProfileImage(ProfileImageRequest $request)
     {
         // ディレクトリ名
         $dir = 'images';

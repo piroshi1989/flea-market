@@ -110,3 +110,28 @@
     margin:20px 0;
     display: block;
 }
+
+@media (max-width: 768px) {
+    .item__content {
+        display: block;
+        margin:auto 0;
+    }
+
+    .item__detail{
+        width:80%;
+        margin:0 auto;
+    }
+
+    .item__image{
+        width:70%;
+        margin:0 auto;
+    }
+
+    .item__category {
+        font-weight: 400;
+        font-size: 20px;
+        padding: 10px;
+        margin-right: 10px;
+    }
+
+}

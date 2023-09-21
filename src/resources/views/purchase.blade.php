@@ -34,7 +34,7 @@
                 </div>
             </div>
             {{-- ユーザーの郵便番号もしくは住所どちらかが登録されていない、かつ、配送先の変更でsessionにも住所が登録されていない場合 --}}
-            @if((empty($shippingInfo->postcode) || empty($shippingInfo->address)) && empty(session('previous_shipping_info')))
+            @if((empty($shippingInfo['postcode']) || empty($shippingInfo['address'])) && empty(session('previous_shipping_info')))
             <div class = "shipping__arart">
                 <p>配送先の情報が不足しています。<br>
                 配送先を変更するか、<a href="/mypage/profile">プロフィール</a>から住所を更新してください</p>

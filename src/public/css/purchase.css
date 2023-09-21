@@ -83,3 +83,25 @@
 
 
 
+@media (max-width: 768px) {
+    .purchase {
+        display: block;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .item__wrap, .purchase__wrap {
+        width: 100%;
+        padding: 30px;
+    }
+
+    .item__content {
+        display: block;
+        width: 100%;
+    }
+
+    .item__image {
+        width: 80%;
+        text-align: center;
+    }
+}
