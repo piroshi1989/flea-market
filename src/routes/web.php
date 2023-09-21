@@ -30,6 +30,7 @@ use App\Http\Controllers\SearchController;
 |
 */
 
+//ログインしなくてもみれる
 Route::get('/', [IndexController::class, 'index']);
 Route::post('/search', [SearchController::class, 'searchItems']);
 Route::get('/search', [SearchController::class, 'searchItems']);
@@ -39,15 +40,20 @@ Route::get('/item/{id}/contacts', [ContactController::class, 'showContact'])->na
 Route::middleware('verified')->group(function () {
 //Route::middleware('auth')->group(function () {
   Route::get('/user', [IndexController::class, 'index']);
-  Route::get('/mypage', [MyPageController::class, 'showMyPage']);
   Route::get('/mylist', [MyListController::class, 'showMyList']);
   Route::get('/recommend', [RecommendController::class, 'showRecommend']);
-  Route::get('/mypage/profile', [ProfileController::class, 'showProfile']);
-  Route::post('/mypage/profile/upload', [ProfileController::class, 'uploadProfileImage']);
-  Route::PATCH('/mypage/profile/update', [ProfileController::class, 'updateProfile']);
-  Route::get('/mypage/purchased', [MyPageController::class, 'showPurchasedItems']);
-  Route::get('/mypage/exhibited', [MyPageController::class, 'showExhibitedItems']);
-  Route::get('/mypage/following', [MyPageController::class, 'showFollowing']);
+
+  //mypageでまとめる
+  Route::prefix('mypage')->group(function () {
+    Route::get('/', [MyPageController::class, 'showMyPage']);
+    Route::get('/profile', [ProfileController::class, 'showProfile']);
+    Route::post('/profile/upload', [ProfileController::class, 'uploadProfileImage']);
+    Route::PATCH('/profile/update', [ProfileController::class, 'updateProfile']);
+    Route::get('/purchased', [MyPageController::class, 'showPurchasedItems']);
+    Route::get('/exhibited', [MyPageController::class, 'showExhibitedItems']);
+    Route::get('/following', [MyPageController::class, 'showFollowing']);
+  });
+
   Route::get('/sell', [SellController::class, 'showSell']);
   Route::post('/sell/store', [SellController::class, 'storeSell']);
   //子カテゴリー取得用ルート
@@ -59,10 +65,9 @@ Route::middleware('verified')->group(function () {
   // カウント取得用のルート
   Route::get('/getLikeCount/{itemId}', [LikeController::class, 'getLikeCount']);
   Route::get('/getLikeCount/{itemId}', [LikeController::class, 'getLikeCount']);
-
   Route::post('/contact/store', [ContactController::class, 'storeContact']);
   Route::delete('/contact/delete', [ContactController::class, 'destroyContact']);
-  
+
   Route::get('/purchase/{id}', [PurchaseController::class, 'showPurchase']);
   Route::get('/paymentmethod/{id}', [PaymentMethodController::class, 'showPaymentMethod']);
   Route::post('/paymentmethod/select', [PaymentMethodController::class, 'selectPaymentMethod']);
@@ -70,13 +75,13 @@ Route::middleware('verified')->group(function () {
   Route::post('/address/change', [AddressController::class, 'changeAddress']);
   Route::post('/purchase/confirm', [PurchaseController::class, 'confirm']);
   Route::post('/purchase/thanks', [PurchaseController::class, 'storePurchase']);
-  
+
   Route::get('/payment/{id}', [StripePaymentController::class, 'create']);
   Route::post('/payment/store', [StripePaymentController::class, 'store']);
-    //user follow機能
-    Route::post('/following/store',[FollowingController::class,'storeFollowing']);
-    Route::delete('/following/delete',[FollowingController::class,'destroyFollowing']);
-    
+  //user follow機能
+  Route::post('/following/store',[FollowingController::class,'storeFollowing']);
+  Route::delete('/following/delete',[FollowingController::class,'destroyFollowing']);
+
   //管理者
   Route::group(['middleware' => ['can:admin']], function () {
     Route::get('/management', [ManagementController::class, 'showManagement']);

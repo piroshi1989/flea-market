@@ -24,10 +24,11 @@ class ItemRequest extends FormRequest
     public function rules()
     {
         return [
+            'image' => ['required', 'mimes:jpeg,jpg,png,gif,tiff'],
             'category_id' => ['required', 'integer', 'exists:categories,id'],
             'condition_id' => ['required', 'integer', 'exists:conditions,id'],
             'brand_id' => ['required', 'integer',],
-            'name' => ['required', 'string' , 'max:80'],
+            'name' => ['required', 'string', 'max:80'],
             'detail' => ['required', 'string', 'max:10000'],
             'price' => ['required', 'integer', 'min:300','max:10000000'],
         ];
@@ -36,6 +37,7 @@ class ItemRequest extends FormRequest
     public function messages()
     {
         return [
+            'image.required' => '画像ファイルを選択してください',
             'category_id.required' => 'カテゴリーを選択してください',
             'brand_id.required' => 'ブランドを選択してください',
             'condition_id.required' => '商品の状態を選択してください',
@@ -45,6 +47,7 @@ class ItemRequest extends FormRequest
             'detail.string' => '詳細を文字列で入力してください',
             'detail.max' => '詳細を10000文字以内で入力してください',
             'price.required' => '販売価格を入力してください',
+            'price.integer' => '販売価格を正しく入力してください',
             'price.max' => '販売価格は300円から10,000,000円の間で設定してください',
             'price.min' => '販売価格は300円から10,000,000円の間で設定してください',
         ];

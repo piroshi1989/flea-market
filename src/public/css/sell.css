@@ -24,3 +24,10 @@
     font-size: 30px;
     font-weight: 700;
 }
+
+@media (max-width: 768px) {
+    .form__group-content input {
+        height: 2em;
+        font-size: 20px;
+    }
+}

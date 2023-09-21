@@ -46,9 +46,15 @@
             <a class="form__button-submit">出品商品です
             </a>
             @else
+            @auth
             <a href={{ asset('/purchase/' . $item->id)}} class="form__button-submit">購入する
             </a>
+            @endauth
             @endif
+            @guest
+            <a class="form__button-submit">購入にはログインしてください
+            </a>
+            @endguest
         </div>
         <h3 class="item__description">商品説明</h3>
         <p class="description__detail">{{ $item->detail }}</p>
@@ -63,7 +69,7 @@
                         <div class="item__category">
                             {{ $item->category->name }}
                         </div>
-                        @if($item->childCategory->name !== 'その他')
+                        @if((!empty($item->childCategory->name)) && $item->category->name !== 'その他' )
                         <div class="item__category">
                             {{ $item->childCategory->name }}
                         </div>

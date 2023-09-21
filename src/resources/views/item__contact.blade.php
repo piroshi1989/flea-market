@@ -16,7 +16,7 @@
         <img src="{{asset($item->image_url)}}">
     </div>
     <div class= "item-contact__wrap">
-        <div class="item__detail">
+        <div class="item-contact__detail">
             <p class="item__name">{{ $item->name }}</p>
             <p class="item__brand">ブランド</p>
             <p class="item__price_detail">¥{{ $item->price }}(値段)</p>
@@ -43,6 +43,7 @@
         </div>
         <div class= "contact__content">
             @foreach($contacts as $contact)
+            {{-- 出品者はアイコンを右寄せにする --}}
             <div class= "profile__content{{ $contact->user['id'] === $item['user_id'] ? ' right-align' : '' }}">
                 <div class="profile__image">
                     @empty($contact->user['image_url'])

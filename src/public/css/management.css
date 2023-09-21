@@ -63,3 +63,10 @@
 .graph__content{
     margin:30px;
 }
+
+@media (max-width: 768px) {
+    .form__group-content input {
+        height: 2em;
+        font-size: 20px;
+    }
+}

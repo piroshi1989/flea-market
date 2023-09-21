@@ -21,51 +21,56 @@
         <label for="fileInput" class="upload__image-button">
         </label>
         <input type="file" name="image" id="fileInput" style="display: none;">
+        <div class="form__error">
+            @error('image')
+            {{ $message }}
+            @enderror
+        </div>
         <div class="form__group">
             <h3 class="form__title">商品の詳細</h3>
             <hr class="centered-hr">
             <div class="form__group-content">
                 <p class="input__title">カテゴリー</p>
                 <select name="category_id" class="category_id">
-                    <option>選択してください</option>
+                    <option value="">選択してください</option>
                     @foreach($categories as $category)
-                    <option class="categories__option" value="{{ $category->id}}">
+                    <option class="categories__option" value="{{ $category->id}}" {{ old('category_id') == $category->id ? 'selected' : '' }} >
                         {{ $category->name }}
                     </option>
                     @endforeach
                 </select>
+                <div class="form__error">
+                    @error('category_id')
+                    {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="form__group-content">
                 <p class="input__title">カテゴリー2</p>
                 <select name="child_category_id" class="child_category_id">
-                    <option>選択してください</option>
-                    @foreach($child_categories as $child_category)
-                    <option class="child_categories__option" value="{{ $child_category->id}}">
-                        {{ $child_category->name }}
+                    <option value="">選択してください</option>
+                    @foreach($childCategories as $childCategory)
+                    <option class="child_categories__option" value="{{ $childCategory->id}}"  {{ old('child_category_id') == $childCategory->id ? 'selected' : '' }} >
+                        {{ $childCategory->name }}
                     </option>
                     @endforeach
                 </select>
-            </div>
-            <div class="form__error">
-                @error('category_id')
-                {{ $message }}
-                @enderror
             </div>
         </div>
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">ブランド名</p>
                 <select name="brand_id" class="brand_id">
-                    <option>選択してください</option>
+                    <option value="">選択してください</option>
                     @foreach($brands as $brand)
-                    <option class="brands__option" value="{{ $brand->id}}">
+                    <option class="brands__option" value="{{ $brand->id}}" {{ old('brand_id') == $brand->id ? 'selected' : '' }}>
                         {{ $brand->name }}
                     </option>
                     @endforeach
                 </select>
             </div>
             <div class="form__error">
-                @error('brand')
+                @error('brand_id')
                 {{ $message }}
                 @enderror
             </div>
@@ -74,9 +79,9 @@
             <div class="form__group-content">
                 <p class="input__title">商品の状態</p>
                 <select name="condition_id" class="condition_id">
-                    <option>選択してください</option>
+                    <option value="">選択してください</option>
                     @foreach($conditions as $condition)
-                    <option class="conditions__option" value="{{ $condition->id}}">
+                    <option class="conditions__option" value="{{ $condition->id}}" {{ old('condition_id') == $condition->id ? 'selected' : '' }}>
                         {{ $condition->name }}
                     </option>
                     @endforeach
@@ -104,7 +109,7 @@
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">商品の説明</p>
-                <textarea name="detail" value="{{ old('detail') }}"></textarea>
+                <textarea name="detail">{{ old('detail') }}</textarea>
             </div>
             <div class="form__error">
                 @error('detail')
@@ -117,7 +122,7 @@
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">販売価格</p>
-                <input type="text" name="price" placeholder="¥" value="{{ old('price') }}">
+                <input type="number" name="price" placeholder="¥" value="{{ old('price') }}">
             </div>
             <div class="form__error">
                 @error('price')

@@ -49,3 +49,14 @@
     color: red;
     margin: 0 10px;
 }
+
+.item-contact__detail{
+    margin-bottom:20px;
+}
+
+@media (max-width: 768px) {
+    .item-contact__wrap {
+        width: 80%;
+        margin:0 auto;
+    }
+}

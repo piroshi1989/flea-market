@@ -26,6 +26,11 @@
             <label for="fileInput" class="upload__image-button">
             </label>
             <input type="file" name="image" id="fileInput" style="display: none;">
+            <div class="form__error">
+                @error('image')
+                {{ $message }}
+                @enderror
+            </div>
         </form>
     </div>
 

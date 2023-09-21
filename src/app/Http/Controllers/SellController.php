@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Item;
 use App\Models\ChildCategory;
 use App\Models\Condition;
 use App\Models\Brand;
@@ -17,12 +18,12 @@ class SellController extends Controller
         $categories = Category::all();
         $conditions = Condition::all();
         $brands = Brand::all();
-        $child_categories = ChildCategory::all();
+        $childCategories = ChildCategory::all();
 
         $selectedCategory = $request->input('category');
         $selectedBrand = $request->input('brand');
 
-        return view('sell', compact('categories','child_categories', 'conditions','brands', 'selectedCategory', 'selectedBrand'));
+        return view('sell', compact('categories','childCategories', 'conditions','brands', 'selectedCategory', 'selectedBrand'));
     }
 
     public function storeSell(ItemRequest $request)
@@ -31,6 +32,7 @@ class SellController extends Controller
         $store->user_id = Auth::id();
         $store->category_id = $request->category_id;
         $store->child_category_id = $request->child_category_id;
+        $store->brand_id = $request->brand_id;
         $store->condition_id = $request->condition_id;
         $store->name = $request->name;
         $store->detail = $request->detail;
