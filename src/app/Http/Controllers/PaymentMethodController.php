@@ -10,9 +10,9 @@ use App\Models\Brand;
 
 class PaymentMethodController extends Controller
 {
-    public function showPaymentMethod($id, Request $request)
+    public function showPaymentMethod($itemId, Request $request)
     {
-        $item = Item::findOrFail($id);
+        $item = Item::findOrFail($itemId);
         $paymentMethods = PaymentMethod::all();
 
         //検索用

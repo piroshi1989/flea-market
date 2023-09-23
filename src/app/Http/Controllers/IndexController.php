@@ -48,7 +48,8 @@ class IndexController extends Controller
         }
 
         // クエリを実行してアイテムを取得
-        $items = $query->get();
+        //おすすめを最新50件取得とする
+        $items = $query->limit(50)->get();
 
         //売却済ならSoldOutを表示される
         $items->map(function ($item) {

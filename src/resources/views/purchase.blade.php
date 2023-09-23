@@ -82,7 +82,6 @@
                 @else
                 <input type="hidden" name="payment_method_id" value="{{ session('previous_payment_method')['id'] }}">
                 @endif
-                <input type="hidden" name="shipping_name" value="{{ $shippingInfo['name'] }}">
 
                 @if( empty(session('previous_shipping_info')))
                 <input type="hidden" name="postcode" value="{{ $shippingInfo['postcode'] }}">

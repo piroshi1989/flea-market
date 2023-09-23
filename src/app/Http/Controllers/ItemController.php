@@ -51,12 +51,4 @@ class ItemController extends Controller
 
         return view('item', compact('item', 'likeData', 'likeCount', 'contactCount', 'soldOutInfo','userId','followingUsers', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
     }
-
-    public function getChildCategories($categoryId)
-    {
-        // $categoryIdに基づいて関連する子カテゴリーを取得
-        $childCategories = ChildCategory::where('category_id', $categoryId)->get();
-    
-        return response()->json($childCategories);
-    }
 }

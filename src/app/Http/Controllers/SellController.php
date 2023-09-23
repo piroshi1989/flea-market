@@ -26,6 +26,14 @@ class SellController extends Controller
         return view('sell', compact('categories','childCategories', 'conditions','brands', 'selectedCategory', 'selectedBrand'));
     }
 
+    public function getChildCategories($categoryId)
+    {
+        // $categoryIdに基づいて関連する子カテゴリーを取得
+        $childCategories = ChildCategory::where('category_id', $categoryId)->get();
+
+        return response()->json($childCategories);
+    }
+
     public function storeSell(ItemRequest $request)
     {
         $store = new Item;

@@ -23,7 +23,7 @@ class SendMailController extends Controller
         $selectedCategory = $request->input('category');
         $selectedBrand = $request->input('brand');
 
-        return view('mail_confirm', compact('emails', 'categories', 'brands','selectedCategory', 'selectedBrand'));
+        return view('mail__confirm', compact('emails', 'categories', 'brands','selectedCategory', 'selectedBrand'));
     }
 
     public function sendNoticeMail(SendMailRequest $request){

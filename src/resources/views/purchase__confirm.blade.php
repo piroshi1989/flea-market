@@ -29,7 +29,9 @@
         <div class="form__group">
             <div class="form__group-content">
                 <p class="input__title">送り先宛名</p>
-                <input type="text" class="confirm__item" name="shipping_name" value="{{ $purchaseInfo['shipping_name'] }}" readonly>
+                <div class="confirm__item">
+                    <p>{{ $shippingName }}</p>
+                </div>
             </div>
         </div>
         <div class="form__group">

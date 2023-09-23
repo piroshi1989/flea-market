@@ -6,8 +6,15 @@
 
 @section('content')
 <div class= index__select>
-    <a href="/recommend" class= "non-color__select">おすすめ</a>
-    <a href="/mylist" class= "non-color__select">マイリスト</a>
+  {{-- ログイン前のおすすめ商品は商品最新50件 --}}
+  @guest
+  <a href="/" class= "color__select">おすすめ</a>
+  @endguest
+  {{-- ログイン後のおすすめ商品は/recommendに遷移してsessionで取得した商品を表示　indexでは最新50件のみ取得 --}}
+  @auth
+  <a href="/recommend" class= "non-color__select">おすすめ</a>
+  @endauth
+  <a href="/mylist" class= "non-color__select">マイリスト</a>
 </div>
 <hr class="centered-hr">
 <form method="GET" action="/" id="form">
