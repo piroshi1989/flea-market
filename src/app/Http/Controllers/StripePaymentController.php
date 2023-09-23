@@ -7,9 +7,9 @@ use App\Models\Sale;
 
 class StripePaymentController extends Controller
 {
-    public function create($id)
+    public function create($itemId)
     {
-        $purchaseInfo = Sale::where('item_id', $id)->first();
+        $purchaseInfo = Sale::where('item_id', $itemId)->first();
 
         return view('stripe__payment',compact('purchaseInfo'));
     }

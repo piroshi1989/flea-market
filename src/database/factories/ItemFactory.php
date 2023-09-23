@@ -21,9 +21,13 @@ class ItemFactory extends Factory
     {
         $image_url = 'https://loremflickr.com/640/480?lock=' . $this->faker->numberBetween(1,100);
         //ダミーイメージはloremflickrから取得する
-        $category = Category::find($this->faker->numberBetween(1, 8));
-        $childCategoryIds = ChildCategory::where('category_id', $category->id)->pluck('id')->toArray();
-        //childCategoryは親のcategory_idを検索したのち取得
+        $categoryId = $this->faker->numberBetween(1, 8);
+        $category = Category::findOrFail($categoryId);
+        
+        if($category){
+            $childCategoryIds = ChildCategory::where('category_id', $category->id)->pluck('id')->toArray();
+            //childCategoryは親のcategory_idを検索したのち取得
+        }
 
         return [
             'name' => $this->faker->word,

@@ -52,8 +52,10 @@
             @endauth
             @endif
             @guest
+            @if(!$soldOutInfo)
             <a class="form__button-submit">購入にはログインしてください
             </a>
+            @endif
             @endguest
         </div>
         <h3 class="item__description">商品説明</h3>

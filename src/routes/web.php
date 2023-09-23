@@ -33,7 +33,6 @@ use App\Http\Controllers\SearchController;
 //ログインしなくてもみれる
 Route::get('/', [IndexController::class, 'index']);
 Route::post('/search', [SearchController::class, 'searchItems']);
-Route::get('/search', [SearchController::class, 'searchItems']);
 Route::get('/item/{id}', [ItemController::class, 'showDetailItem'])->name('item');
 Route::get('/item/{id}/contacts', [ContactController::class, 'showContact'])->name('item__contact');
 
@@ -48,7 +47,7 @@ Route::middleware('verified')->group(function () {
     Route::get('/', [MyPageController::class, 'showMyPage']);
     Route::get('/profile', [ProfileController::class, 'showProfile']);
     Route::post('/profile/upload', [ProfileController::class, 'uploadProfileImage']);
-    Route::PATCH('/profile/update', [ProfileController::class, 'updateProfile']);
+    Route::patch('/profile/update', [ProfileController::class, 'updateProfile']);
     Route::get('/purchased', [MyPageController::class, 'showPurchasedItems']);
     Route::get('/exhibited', [MyPageController::class, 'showExhibitedItems']);
     Route::get('/following', [MyPageController::class, 'showFollowing']);
@@ -57,26 +56,27 @@ Route::middleware('verified')->group(function () {
   Route::get('/sell', [SellController::class, 'showSell']);
   Route::post('/sell/store', [SellController::class, 'storeSell']);
   //子カテゴリー取得用ルート
-  Route::get('/get-child-categories/{categoryId}', [ItemController::class, 'getChildCategories']);
+  Route::get('/get-child-categories/{categoryId}', [SellController::class, 'getChildCategories']);
+
   Route::post('/like/{itemId}', [LikeController::class, 'toggleLike']);
   Route::delete('/like/{itemId}', [LikeController::class, 'toggleLike']);
   // アイテムの「いいね」情報を取得するルート
   Route::get('/getLikedData/{itemId}', [LikeController::class, 'getLikedData']);
   // カウント取得用のルート
   Route::get('/getLikeCount/{itemId}', [LikeController::class, 'getLikeCount']);
-  Route::get('/getLikeCount/{itemId}', [LikeController::class, 'getLikeCount']);
+  //問い合わせ機能
   Route::post('/contact/store', [ContactController::class, 'storeContact']);
   Route::delete('/contact/delete', [ContactController::class, 'destroyContact']);
-
-  Route::get('/purchase/{id}', [PurchaseController::class, 'showPurchase']);
-  Route::get('/paymentmethod/{id}', [PaymentMethodController::class, 'showPaymentMethod']);
+  //商品購入機能
+  Route::get('/purchase/{itemId}', [PurchaseController::class, 'showPurchase']);
+  Route::get('/paymentmethod/{itemId}', [PaymentMethodController::class, 'showPaymentMethod']);
   Route::post('/paymentmethod/select', [PaymentMethodController::class, 'selectPaymentMethod']);
-  Route::get('/address/{id}', [AddressController::class, 'showAddress']);
+  Route::get('/address/{itemId}', [AddressController::class, 'showAddress']);
   Route::post('/address/change', [AddressController::class, 'changeAddress']);
   Route::post('/purchase/confirm', [PurchaseController::class, 'confirm']);
   Route::post('/purchase/thanks', [PurchaseController::class, 'storePurchase']);
-
-  Route::get('/payment/{id}', [StripePaymentController::class, 'create']);
+  //stripe決済機能
+  Route::get('/payment/{itemId}', [StripePaymentController::class, 'create']);
   Route::post('/payment/store', [StripePaymentController::class, 'store']);
   //user follow機能
   Route::post('/following/store',[FollowingController::class,'storeFollowing']);

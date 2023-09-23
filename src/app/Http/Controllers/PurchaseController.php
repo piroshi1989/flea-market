@@ -14,9 +14,9 @@ use App\Http\Requests\PurchaseRequest;
 
 class PurchaseController extends Controller
 {
-    public function showPurchase($id, Request $request)
+    public function showPurchase($itemId, Request $request)
     {
-        $item = Item::findOrFail($id);
+        $item = Item::findOrFail($itemId);
         //デフォルトはコンビニ払いにする
         $paymentMethod = PaymentMethod::get()->first();
 
@@ -24,7 +24,6 @@ class PurchaseController extends Controller
         $user = Auth::user();
 
         $shippingInfo = [
-            'name' => $user->name,
             'postcode' => $user->postcode,
             'address' => $user->address,
             'building_name' => $user->building_name,
@@ -45,6 +44,8 @@ class PurchaseController extends Controller
         $purchaseInfo = $request->all();
         $paymentMethodName = PaymentMethod::findOrFail($purchaseInfo['payment_method_id'])->name;
 
+        $shippingName = Auth::user()->name;
+
         //検索用
         $categories = Category::all();
         $brands = Brand::all();
@@ -52,32 +53,37 @@ class PurchaseController extends Controller
         $selectedCategory = $request->input('category');
         $selectedBrand = $request->input('brand');
 
-        return view('purchase__confirm',compact('purchaseInfo', 'paymentMethodName', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
+        return view('purchase__confirm',compact('purchaseInfo','shippingName', 'paymentMethodName', 'categories', 'brands', 'selectedCategory', 'selectedBrand'));
     }
 
-    public function storePurchase(Request $request)
+    public function storePurchase(PurchaseRequest $request)
     {
         $store = new Sale;
         $store->user_id = $request->user_id;
         $store->item_id = $request->item_id;
         $store->payment_amount = $request->payment_amount;
         $store->payment_method_id = $request->payment_method_id;
-        $store->shipping_name = $request->shipping_name;
         $store->postcode = $request->postcode;
         $store->address = $request->address;
         $store->building_name = $request->building_name;
 
         //コンビニ払いなら、ランダムで支払番号を出力し保存する
-        if($request->payment_method_id == 1){
+        $existingPaymentCodes = Sale::pluck('payment_code')->toArray();
+
+        // 重複しないランダムなコードを生成する
+        do {
             $paymentCode = mt_rand(100000000, 999999999);
-            $paymentMethodId = $request->payment_method_id;
-            $store->payment_code = $paymentCode;
-        }
+        } while (in_array($paymentCode, $existingPaymentCodes));
+
+        // 生成されたコードを使用する
+        $paymentMethodId = $request->payment_method_id;
+        $store->payment_code = $paymentCode;
 
         $store->save();
 
         $saleInfo = Sale::where('item_id', $request->item_id)->first();
         $salePaymentMethodId = $saleInfo['payment_method_id'];
+        
 
         //検索用
         $categories = Category::all();
