@@ -10,6 +10,7 @@ use App\Models\Brand;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ItemRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SellController extends Controller
 {
@@ -46,14 +47,14 @@ class SellController extends Controller
         $store->detail = $request->detail;
         $store->price = $request->price;
 
-        $dir = 'images';
         $uploadedFile = $request->file('image');
         if ($uploadedFile) {
-            $file_name = $uploadedFile->getClientOriginalName();
+            $fileName = $uploadedFile->getClientOriginalName();
+            $path = 'https://flea-market-s3.s3.ap-northeast-1.amazonaws.com/' . $fileName;
+            // S3へファイルをアップロード
+            $result = Storage::disk('s3')->put($fileName, file_get_contents($uploadedFile));
 
-            $uploadedFile->storeAs('public/' . $dir, $file_name);
-
-            $store->image_url = 'storage/' . $dir . '/' . $file_name;
+            $store->image_url =  $path;
         }
 
         $store->save();

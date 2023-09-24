@@ -70,8 +70,9 @@ $ docker-compose exec php bash
 //PHPコンテナ上で以下のコマンドを入力  
 $ composer install  
 $ composer require stripe/stripe-php  
-$ composer require league/flysystem-aws-s3-v3  
+$ composer require league/flysystem-aws-s3-v3 ^1.0  
 $ cp .env.example .env  
+$ cp .env.example .env.testing  
 $ php artisan key:generate  
 $ php artisan key:generate --env=testing  
 $ php artisan migrate  
@@ -103,17 +104,17 @@ $ sudo usermod -aG docker ec2-user
 $ sudo mkdir -p /usr/local/lib/docker/cli-plugins  
 $ sudo curl -SL https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose  
 $ sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose  
-$ sudo systemctl status docker
+$ sudo systemctl status docker  
 $ docker compose up -d  
 $ docker compose exec php bash  
-$ composer require league/flysystem-aws-s3-v3  
 //PHPコンテナ上で以下のコマンドを入力  
 $ composer install  
 $ composer require stripe/stripe-php  
+$ composer require league/flysystem-aws-s3-v3 ^1.0  
 $ cp .env.example .env  
+$ cp .env.example .env.testing  
 $ php artisan key:generate  
 $ php artisan key:generate --env=testing  
-
 $ exit  
   
 //RDSの設定 mysqlコンテナ上で以下のコマンドを入力  
@@ -141,6 +142,8 @@ AWS_BUCKET=#バケット名を入れます#
 AWS_USE_PATH_STYLE_ENDPOINT=false  
   
 //.env.testingを修正  
+APP_ENV=test  
+  
 DB_CONNECTION=mysql  
 DB_HOST=RDSのエンドポイント  
 DB_PORT=3306  
@@ -164,7 +167,6 @@ $ php artisan db:seed
 $ php artisan migrate --env=testing  
 $ php artisan db:seed --env=testing  
 $ exit  
-
 
 
 ##他に記載することがあれば記述する
