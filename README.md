@@ -72,6 +72,7 @@ $ composer install
 $ composer require stripe/stripe-php  
 $ composer require league/flysystem-aws-s3-v3  
 $ cp .env.example .env  
+$ cp .env.example .env.testing  
 $ php artisan key:generate  
 $ php artisan key:generate --env=testing  
 $ php artisan migrate  
