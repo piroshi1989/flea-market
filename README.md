@@ -120,7 +120,7 @@ $ exit
 //RDSの設定 mysqlコンテナ上で以下のコマンドを入力  
 $ docker compose exec mysql bash  
 $ mysql -h <RDSのエンドポイント> -P 3306 -u admin -p  
-$ CREATE DATABASE laraveldb;  
+$ CREATE DATABASE laravel_db;  
 $ CREATE DATABASE demo_test;  
   
 //.envを修正  
@@ -128,7 +128,7 @@ $ CREATE DATABASE demo_test;
 DB_CONNECTION=mysql  
 DB_HOST=RDSのエンドポイント  
 DB_PORT=3306  
-DB_DATABASE=laraveldb  
+DB_DATABASE=laravel_db  
 DB_USERNAME=RDSのuser  
 DB_PASSWORD=RDSのpass  
 //stripe  
