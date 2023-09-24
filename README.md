@@ -110,7 +110,7 @@ $ docker compose exec php bash
 //PHPコンテナ上で以下のコマンドを入力  
 $ composer install  
 $ composer require stripe/stripe-php  
-$ composer require league/flysystem-aws-s3-v3 ^1.0  
+$ composer require league/flysystem-aws-s3-v3 --with-all-dependencies  
 $ cp .env.example .env  
 $ cp .env.example .env.testing  
 $ php artisan key:generate  
