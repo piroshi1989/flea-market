@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\ProfileImageRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -29,23 +30,20 @@ class ProfileController extends Controller
 
     public function uploadProfileImage(ProfileImageRequest $request)
     {
-        // ディレクトリ名
-        $dir = 'images';
 
         // アップロードされたファイルを取得
         $uploadedFile = $request->file('image');
 
         // アップロードされたファイルがある場合
         if ($uploadedFile) {
-            // アップロードされたファイル名を取得
-            $file_name = $uploadedFile->getClientOriginalName();
-
-            // 取得したファイル名で保存
-            $uploadedFile->storeAs('public/' . $dir, $file_name);
+            $fileName = $uploadedFile->getClientOriginalName();
+            $path = 'https://flea-market-s3.s3.ap-northeast-1.amazonaws.com/' . $fileName;
+            // S3へファイルをアップロード
+            $result = Storage::disk('s3')->put($fileName, file_get_contents($uploadedFile));
 
             // ファイル情報をDBに保存
             $user = Auth::user();
-            $user->image_url = 'storage/' . $dir . '/' . $file_name;
+            $user->image_url =  $path;
             $user->save();
         }
 
