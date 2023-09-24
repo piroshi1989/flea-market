@@ -185,4 +185,4 @@ mail:f@gmail.com  password:password
 RDSは別のインスタンスを接続しました  
 テスト:http://ec2-3-113-123-157.ap-northeast-1.compute.amazonaws.com  
   
-・EC2上では.envのmail関連は設定していません。ですので、新規ユーザー作成の場合、認証はURLの末尾に:8080を追加してphpmyadminで直接入力をお願いします。  
+・EC2上では.envのmail関連は設定していません
